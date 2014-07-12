@@ -1,0 +1,90 @@
+
+.tbl {	/* 表格样式*/
+    border: 1px solid #0058a3;	/* 表格边框 */
+    font-family: Arial;
+    border-collapse: collapse;	/* 边框重叠 */
+    background-color: #eaf5ff;	/* 表格背景色 */
+    font-size: 14px;
+}
+
+.tbl th {						/* 行名称样式 */
+    border: 1px solid #0058a3;		/* 行名称边框 */
+    background-color: #4bacff;		/* 行名称背景色 */
+    color: #FFFFFF;				/* 行名称颜色 */
+    
+    padding: 4px  12px;
+    			/* 水平对齐 */
+}
+
+.tbl td {
+	line-height:22px;
+}
+
+.tbl tr:hover { 
+//	background-color: #CC9999;	/* 动态变色 */ 
+}
+
+.menu{
+	width:700px;
+	float:left;
+	//border:#FFF solid 2px;
+	//border-collapse:collapse;
+	height:30px;
+	padding-top:3px;
+	}
+	
+.menu td{
+	background:#4bacff;
+	margin-right:3px;
+	font-weight:bold;
+	text-align:center;
+	list-style-type:none;
+	float:left;
+	font-size:16px;
+	color:#FFF;
+	width:90px;
+	}
+	
+.menu a,.menu a:visited,.menu a:link{
+	text-decoration:none;
+	color:#FFF;}
+	
+.menu a:hover{
+	text-decoration:none;
+	background-color: #F00;	/* 动态变色 */ 
+	}
+
+#nav {
+	width:700px; /* 宽度 */
+	margin:0px auto 0 auto; /* 外边框属性 */
+}
+#nav li {
+	display:inline;
+	width: 100px;
+	font-weight:bold;
+	list-style-type: none;
+}
+#nav li a:link,#nav li a:visited { /* 未访问和已访问的链接*/
+	/*float:left;*/ /* 浮在左边 */
+	padding:5px 5px 5px 5px; /* 内边框属性 */
+	text-decoration: none; /* 没有下划线 */
+	background:#4bacff; /* 背景颜色 */
+	color:#FFF; /* 字体颜色 */
+	//border-bottom:1px solid #fff; /* 下边框属性 */
+}
+#nav li a:hover { /* 鼠标经过 */
+	background:#F00;
+	color:#FFF;
+	//border-bottom:1px solid #06f;
+}
+#nav li a:active { /* 被选择的链接 */
+	background:#000;
+	color:#FFF;
+	//border-bottom:1px solid #000;
+}
+
+#nav li a#current {
+	background:#000;
+	color:#F00;
+	//border-bottom:1px solid #f60;
+}

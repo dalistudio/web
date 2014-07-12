@@ -1,0 +1,3 @@
+eclipse.preferences.version=1
+org.eclipse.php.debug.coredefaultPHP=PHP 5.5.7 (CGI)
+org.eclipse.php.debug.corezend_debug_port=10137
