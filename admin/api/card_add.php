@@ -1,5 +1,9 @@
 <?php
 //
+// Copyright (c) 2014, wangdali <wangdali@qq.com>, All Rights Reserved.
+//
+
+//
 // 门禁卡 - 数据表
 // 添加 - 卡号为唯一值
 //

@@ -1,5 +1,9 @@
 <?php
 //
+// Copyright (c) 2014, wangdali <wangdali@qq.com>, All Rights Reserved.
+//
+
+//
 // 类型
 // 添加 - 即货物的类型和规格
 //

@@ -1,5 +1,9 @@
 <?php
 //
+// Copyright (c) 2014, wangdali <wangdali@qq.com>, All Rights Reserved.
+//
+
+//
 // 系统
 // 更新 - 主要更新单号的开始顺序
 //

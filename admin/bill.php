@@ -14,7 +14,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link rel="stylesheet" type="text/css" href="/css/Default.css" />
-<title>货物管理</title>
+<title>过磅单管理</title>
 <script language="javascript">
 	function OnAdd()
 	{
@@ -35,17 +35,10 @@
 	}
 
 	// 处理选择行事件
-	function OnSelect(id,member,huowu,guige,midu,danjia,danwei,chexing)
+	function OnSelect(id)
 	{
 		//alert("test");
 		document.getElementById("id").value=id;
-		document.getElementById("Member").value=member;
-		document.getElementById("HuoWu").value=huowu;
-		document.getElementById("GuiGe").value=guige;
-		document.getElementById("MiDu").value=midu;
-		document.getElementById("DanJia").value=danjia;
-		document.getElementById("DanWei").value=danwei;
-		document.getElementById("CheXing").value=chexing;
 	}
 </script>
 </head>
@@ -91,41 +84,51 @@
 </form>
 
 <br />
-<table class="tbl" width="600" border="1">
+<table class="tbl" width="1200" border="1">
   <tr>
-    <th scope="col" width="10%">编号</th>
-    <th scope="col" width="20%">客户</th>
-    <th scope="col" width="10%">货物</th>
-    <th scope="col" width="10%">规格</th>
-    <th scope="col" width="10%">密度</th>
-    <th scope="col" width="10%">单价</th>
-    <th scope="col" width="10%">单位</th>
-    <th scope="col" width="10%">车型</th>
+    <th scope="col" width="80">单号</th>
+    <th scope="col" width="100">车号</th>
+    <th scope="col" width="100">单位</th>
+    <th scope="col" width="80">货物</th>
+    <th scope="col" width="80">规格</th>
+    <th scope="col" width="80">净重</th>
+    <th scope="col" width="80">密度</th>
+    <th scope="col" width="80">单价</th>
+    <th scope="col" width="80">金额</th>
+    <th scope="col" width="80">余额</th>
+    <th scope="col" width="80">备注</th>
   </tr>
 <?php
-  $sql  = "Select * FROM member,goods WHERE ";
-  if(strcmp($Member_id,'')!=0) $sql .= "goods.member_id='".$Member_id."' and ";
-  if(strcmp($Goods_HuoWu,'')!=0) $sql .= "goods.goods_name='".$Goods_HuoWu."' and ";
-  if(strcmp($Goods_GuiGe,'')!=0) $sql .= "goods.goods_GuiGe='".$Goods_GuiGe."' and ";
-  $sql .= "member.member_id=goods.member_id";
+  $sql  = "Select * FROM bill";
+//  $sql .= " WHERE ";
+//  if(strcmp($Member_id,'')!=0) $sql .= "goods.member_id='".$Member_id."' and ";
+//  if(strcmp($Goods_HuoWu,'')!=0) $sql .= "goods.goods_name='".$Goods_HuoWu."' and ";
+//  if(strcmp($Goods_GuiGe,'')!=0) $sql .= "goods.goods_GuiGe='".$Goods_GuiGe."' and ";
+//  $sql .= "member.member_id=goods.member_id";
   $sql .= ";";
 
   $result=mysql_query($sql); // 执行SQL语句
   while($row = mysql_fetch_array($result)) // 循环每条记录
   {
-	print("<tr onclick=OnSelect('".$row['goods_id']."','".$row['member_id']."','".$row['goods_name']."','".$row['goods_GuiGe']."','".$row['goods_MiDu']."','".$row['goods_DanJia']."','".$row['goods_DanWei']."','".$row['goods_CheXing']."');>");
- 	print("  <td>".$row['goods_id']."</td>");
-  	print("  <td>".$row['member_name']."</td>");
-  	print("  <td>".$row['goods_name']."</td>");
-  	print("  <td>".$row['goods_GuiGe']."</td>");
-  	print("  <td>".$row['goods_MiDu']."</td>");
-  	print("  <td>".$row['goods_DanJia']."</td>");
-	print("  <td>".$row['goods_DanWei']."</td>");
-	print("  <td>".$row['goods_CheXing']."</td>");
+	print("<tr onclick=OnSelect('".$row['bill_id']."');>");
+ 	print("  <td>".$row['bill_DanHao']."</td>");
+	print("  <td>".$row['bill_CheHao']."</td>");
+  	print("  <td>".$row['bill_DanWei']."</td>");
+  	print("  <td>".$row['bill_HuoWu']."</td>");
+  	print("  <td>".$row['bill_GuiGe']."</td>");
+  	print("  <td>".$row['bill_JingZhong']."</td>");
+  	print("  <td>".$row['bill_MiDu']."</td>");
+	print("  <td>".$row['bill_DanJia']."</td>");
+	print("  <td>".$row['bill_JinE']."</td>");
+	print("  <td>".$row['bill_YuE']."</td>");
+	print("  <td>".$row['bill_BeiZhu']."</td>");
   	print("</tr>");
   }
 ?>
   <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
     <td>&nbsp;</td>
     <td>&nbsp;</td>
     <td>&nbsp;</td>

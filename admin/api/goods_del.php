@@ -1,5 +1,9 @@
 <?php
 //
+// Copyright (c) 2014, wangdali <wangdali@qq.com>, All Rights Reserved.
+//
+
+//
 // 客户价目 - 数据表
 // 删除 - 根据编号删除记录
 //

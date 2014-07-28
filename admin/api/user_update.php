@@ -1,4 +1,8 @@
 <?php
+//
+// Copyright (c) 2014, wangdali <wangdali@qq.com>, All Rights Reserved.
+//
+
 // 
 // 用户
 // 更新 - 根据用户名称更新记录

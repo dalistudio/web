@@ -1,4 +1,7 @@
 <?php
+//
+// Copyright (c) 2014, wangdali <wangdali@qq.com>, All Rights Reserved.
+//
 	include 'session.inc';
 	include 'conn.php';
 	
@@ -12,7 +15,8 @@
 	$sql .= "bill_ZhuangTai='1'"; // 第二次提交的单据
 	$sql .= ")";
 	$sql .= " and ";
-	$sql .= "TO_DAYS(NOW()) - TO_DAYS(bill_GuoBang1) <= 1"; // 查询1天内的记录
+//	$sql .= "TO_DAYS(NOW()) - TO_DAYS(bill_GuoBang1) <= 1"; // 查询1天内的记录
+	$sql .= "UNIX_TIMESTAMP(NOW())-UNIX_TIMESTAMP(bill_GuoBang1)<=86400"; // 查询1天内的记录
 	$sql .= ";";
 
 //	print("sql=".$sql);

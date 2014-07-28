@@ -1,4 +1,7 @@
 <?php
+//
+// Copyright (c) 2014, wangdali <wangdali@qq.com>, All Rights Reserved.
+//
 $mysql_server_name='localhost';
 $mysql_username='root';
 $mysql_password='wdl1031';

@@ -1,4 +1,7 @@
 <?php
+//
+// Copyright (c) 2014, wangdali <wangdali@qq.com>, All Rights Reserved.
+//
 	include 'session.inc';
 	include 'conn.php';
 	$Id = $_GET['id']; // 单号

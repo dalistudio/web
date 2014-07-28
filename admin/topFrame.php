@@ -1,4 +1,7 @@
 <?php
+//
+// Copyright (c) 2014, wangdali <wangdali@qq.com>, All Rights Reserved.
+//
     include 'inc/session.inc';
 //	check_login();
 ?>
@@ -26,8 +29,8 @@ body {
         <li><a href="mainFrame.php" target="mainFrame">首页</a></li>
         <li><a href="user.php" target="mainFrame">用户管理</a></li>
         <li><a href="member.php" target="mainFrame">客户管理</a></li>
-        <li><a href="goods.php" target="mainFrame">货物管理</a></li>
-        <li><a href="pwd.php" target="mainFrame">修改密码</a></li>
+        <li><a href="type.php" target="mainFrame">货物管理</a></li>
+        <li><a href="goods.php" target="mainFrame">价目管理</a></li>
         <li><a href="login.php?logout=yes" target="_top">安全退出</a></li></ul>
       </td></tr>
     </table></td>
@@ -42,7 +45,7 @@ body {
       <tr>
         <td>
         <ul id="nav">
-        <li><a href="bill.php" target="mainFrame">过磅单管理</a></li>
+        <li><a href="pay.php" target="mainFrame">消费管理</a></li>
         <li><a href="report.php" target="mainFrame">账单生成</a></li>
         <li><a href="card.php" target="mainFrame">门禁卡管理</a></li>
         <li><a href="database.php" target="mainFrame">数据库管理</a></li>

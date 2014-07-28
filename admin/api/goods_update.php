@@ -1,5 +1,9 @@
 <?php
 //
+// Copyright (c) 2014, wangdali <wangdali@qq.com>, All Rights Reserved.
+//
+
+//
 // 客户价目 - 数据表
 // 更新 - 根据客户、货物、规格和车型，修改密度、价格和单位
 //

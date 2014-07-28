@@ -1,4 +1,7 @@
 <?php
+//
+// Copyright (c) 2014, wangdali <wangdali@qq.com>, All Rights Reserved.
+//
 	include 'session.inc';
 	include 'conn.php';
 	
@@ -59,13 +62,14 @@
 				print('"md":"'.$row['bill_MiDu'].'",'); // 密度
 				print('"je":"'.$row['bill_JinE'].'",'); // 金额
 				print('"ye":"'.$row['bill_YuE'].'",'); // 余额
-				print('"yh":"'.$row['bill_YouHui'].'",'); // 优惠
+				print('"bz":"'.$row['bill_BeiZhu'].'",'); // 备注
 				print('"gb1":"'.$row['bill_GuoBang1'].'",'); // 第一次过磅时间
 				print('"gb2":"'.$row['bill_GuoBang2'].'",'); // 第二次过磅时间
 				print('"cc":"'.$row['bill_ChuChang'].'",'); // 出场时间
 				print('"sby":"'.$row['bill_SiBangYuan'].'",'); // 司磅员
 				print('"bay":"'.$row['bill_BaoAnYuan'].'",'); // 保安员
-				print('"zt":"'.$row['bill_ZhuangTai'].'"'); // 状态
+				print('"zt":"'.$row['bill_ZhuangTai'].'",'); // 状态
+				print('"type":"'.$row['bill_Type'].'"'); // 支付类型
 				print('}');
 			}
 			

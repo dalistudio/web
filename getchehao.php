@@ -1,7 +1,12 @@
 <?php
+//
+// Copyright (c) 2014, wangdali <wangdali@qq.com>, All Rights Reserved.
+//
 	include 'session.inc';
 	include 'conn.php';
 	$CheHao = $_GET['chehao'];
+	
+	// 这里的车号不需要进行编码转换 
 	
 	$sql  = "SELECT * FROM car WHERE ";
 	$sql .= "car_CheHao='".iconv('GB2312', 'UTF-8', $CheHao)."';";

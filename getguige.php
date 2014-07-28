@@ -1,7 +1,12 @@
 <?php
+//
+// Copyright (c) 2014, wangdali <wangdali@qq.com>, All Rights Reserved.
+//
 	include 'session.inc';
 	include 'conn.php';
 	$HuoWu = $_GET['huowu'];
+	
+	// 这里的货物不需要进行编码转换
 	
 	$sql  = "SELECT * FROM type WHERE ";
 	$sql .= "type_HuoWu='".iconv('GB2312', 'UTF-8', $HuoWu)."';";

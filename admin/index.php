@@ -2,12 +2,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="/css/Default.css" />
 <title>管理员登录界面</title>
 </head>
 
 <body>
 <form id="form1" name="form1" method="post" action="api/login.php">
-<table width="300" border="0" align="center">
+<table class="tbl" width="300" border="0" align="center">
+  <tr>
+    <th colspan="2">登录</th>
+    </tr>
   <tr>
     <td>用户：</td>
     <td>
