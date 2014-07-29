@@ -271,9 +271,9 @@
 			}
 			else
 			{
-				$XJD .= (',H'.$excel_pos);
-				$XJF .= (',I'.$excel_pos);
-				$XJJ .= (',J'.$excel_pos);
+				$XJD .= ('+H'.$excel_pos);
+				$XJF .= ('+I'.$excel_pos);
+				$XJJ .= ('+J'.$excel_pos);
 			}
 			
 			$objPHPExcel->getActiveSheet()->getStyle('A'.$excel_pos.':G'.$excel_pos)->applyFromArray($styleArray);

@@ -22,6 +22,9 @@
 //	$DanWei = ''; // 单位
 //	$HuoWu = ''; // 货物
 //	$GuiGe = ''; // 规格
+
+	// 编码转换
+	$SiBangYuan = iconv('GB2312', 'UTF-8', $SiBangYuan); // 司磅员
 	
 	// 错误报告 
 	error_reporting(E_ALL);
@@ -271,9 +274,9 @@
 			}
 			else
 			{
-				$XJD .= (',H'.$excel_pos);
-				$XJF .= (',I'.$excel_pos);
-				$XJJ .= (',J'.$excel_pos);
+				$XJD .= ('+H'.$excel_pos);
+				$XJF .= ('+I'.$excel_pos);
+				$XJJ .= ('+J'.$excel_pos);
 			}
 			
 			$objPHPExcel->getActiveSheet()->getStyle('A'.$excel_pos.':G'.$excel_pos)->applyFromArray($styleArray);
