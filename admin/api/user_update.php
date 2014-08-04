@@ -9,15 +9,17 @@
 // 
 	include '../../session.inc';
 	include '../../conn.php';
+	$Id = $_GET['id'];
 	$Name = $_GET['Name'];
 	$Pwd = $_GET['Pwd'];
 	$Level = $_GET['Level'];
 	
 	$sql  = "UPDATE user SET ";
 	$sql .= "user_pwd='".$Pwd."',"; // 用户密码
-	$sql .= "user_level='".$Level."'"; // 用户级别
-	$sql .= " WHERE ";
+	$sql .= "user_level='".$Level."',"; // 用户级别
 	$sql .= "user_name='".$Name."'"; // 用户名称
+	$sql .= " WHERE ";
+	$sql .= "user_id='".$Id."'";
 	$sql .= ";";
 	
 	if(inject_check($sql))

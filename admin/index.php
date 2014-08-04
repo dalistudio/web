@@ -27,7 +27,7 @@
   <tr>
     <td><input type="hidden" name="level" id="level" value="0" /></td>
     <td>
-    	<input type="submit" name="button" id="button" value="提交" />
+    	<input type="submit" name="button" id="button" value="登录" />
     </td>
   </tr>
 </table>

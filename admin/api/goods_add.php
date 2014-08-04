@@ -15,7 +15,7 @@
 	$MiDu = $_GET['MiDu'];
 	$DanJia = $_GET['DanJia'];
 	$DanWei = $_GET['DanWei'];
-	$CheXing = $_Get['CheXing'];
+	$CheXing = $_GET['CheXing'];
 	
 	$sql  = "INSERT INTO goods SET ";
 	$sql .= "member_id='".$Member."',"; // 客户编号
@@ -23,8 +23,9 @@
 	$sql .= "goods_GuiGe='".$GuiGe."',"; // 货物规格
 	$sql .= "goods_MiDu='".$MiDu."',"; // 货物密度
 	$sql .= "goods_DanJia='".$DanJia."',"; // 单价
-	$sql .= "card_DanWei='".$DanWei."',"; // 单位
+	$sql .= "goods_DanWei='".$DanWei."',"; // 单位
 	$sql .= "goods_CheXing='".$CheXing."'"; // 车型
+	$sql .= ";";
 	
 	if(inject_check($sql))
 	{

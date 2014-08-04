@@ -9,23 +9,25 @@
 //
 	include '../../session.inc';
 	include '../../conn.php';
+	$Id = $_GET['id'];
 	$Member = $_GET['Member'];
 	$HuoWu = $_GET['HuoWu'];
 	$GuiGe = $_GET['GuiGe'];
 	$MiDu = $_GET['MiDu'];
 	$DanJia = $_GET['DanJia'];
 	$DanWei = $_GET['DanWei'];
-	$CheXing = $_Get['CheXing'];
+	$CheXing = $_GET['CheXing'];
 	
 	$sql  = "UPDATE goods SET ";
 	$sql .= "goods_MiDu='".$MiDu."',"; // 货物密度
 	$sql .= "goods_DanJia='".$DanJia."',"; // 单价
-	$sql .= "goods_DanWei='".$DanWei."'"; // 单位
-	$sql .= " WHERE ";
-	$sql .= "member_id='".$Member."' and "; // 客户编号
-	$sql .= "goods_name='".$HuoWu."' and "; // 货物名称
-	$sql .= "goods_GuiGe='".$GuiGe."' and "; // 货物规格
+	$sql .= "goods_DanWei='".$DanWei."',"; // 单位
+	$sql .= "member_id='".$Member."',"; // 客户编号
+	$sql .= "goods_name='".$HuoWu."',"; // 货物名称
+	$sql .= "goods_GuiGe='".$GuiGe."',"; // 货物规格
 	$sql .= "goods_CheXing='".$CheXing."'"; // 车型
+	$sql .= " WHERE ";
+	$sql .= "goods_id='".$Id."'";
 	$sql .= ";";
 	
 	if(inject_check($sql))

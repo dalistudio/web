@@ -89,7 +89,7 @@
   </tr>
   <tr>
     <td align="center">编号：</td>
-    <td><input name="id" type="text" disabled="disabled" id="id" readonly="readonly" /></td>
+    <td><input name="id" type="text" id="id" readonly="readonly" /></td>
   </tr>
   <tr>
     <td align="center">名称：</td>

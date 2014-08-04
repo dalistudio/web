@@ -1,3 +1,10 @@
+<?php
+//
+// Copyright (c) 2014, wangdali <wangdali@qq.com>, All Rights Reserved.
+//
+	include '../session.inc';
+	include '../conn.php';
+?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -49,7 +56,19 @@ function onPost(id)
   </tr>
   <tr>
     <td align="right">客户：</td>
-    <td><input type="text" name="DanWei" /></td>
+    <td>
+    <select name="DanWei" id="DanWei">
+        <?php
+			$member_sql = "Select * FROM member;";
+			$member_result=mysql_query($member_sql);
+			print("<option value=''>");
+			while($member_row = mysql_fetch_array($member_result))
+			{
+				print("<option value=".$member_row['member_name'].">".$member_row['member_name']);
+			}
+		?>
+    	</select>
+    </td>
   </tr>
   <tr>
     <td align="right">客户类型：</td>

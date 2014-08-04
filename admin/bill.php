@@ -5,7 +5,9 @@
 	include '../session.inc';
 	include '../conn.php';
 	
-	$Member_id = $_POST['member_id'];
+	$Start = $_POST['start'];
+	$End = $_POST['end'];
+	$Member = $_POST['Member'];
 	$Goods_HuoWu = $_POST['goods_HuoWu'];
 	$Goods_GuiGe = $_POST['goods_GuiGe'];
 ?>
@@ -15,51 +17,53 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link rel="stylesheet" type="text/css" href="/css/Default.css" />
 <title>过磅单管理</title>
+<script src="/js/WdatePicker.js"></script> 
 <script language="javascript">
-	function OnAdd()
-	{
-		document.form1.action = "api/goods_add.php";
-		document.form1.submit(); // 提交按钮
-	}
-
-	function OnUpdate()
-	{
-		document.form1.action = "api/goods_update.php";
-		document.form1.submit(); // 提交按钮
-	}
-	
 	function OnDel()
 	{
-		document.form1.action = "api/goode_del.php";
+		document.form1.action = "api/bill_del.php";
 		document.form1.submit(); // 提交按钮
 	}
 
 	// 处理选择行事件
-	function OnSelect(id)
+	function OnSelect(id,DanHao,CheHao,DanWei,HuoWu,GuiGe)
 	{
 		//alert("test");
 		document.getElementById("id").value=id;
+		document.getElementById("DanHao").value=DanHao;
+		document.getElementById("CheHao").value=CheHao;
+		document.getElementById("DanWei").value=DanWei;
+		document.getElementById("HuoWu").value=HuoWu;
+		document.getElementById("GuiGe").value=GuiGe;
 	}
 </script>
 </head>
 
 <body>
-<form id="Form_Find" method="post" action="goods.php">
+<form id="Form_Find" method="post" action="bill.php">
 <table class="tbl" width="300" border="1">
 	<tr>
     	<th colspan="2">查询条件</th>
     </tr>
+    <tr>
+    <th align="right">开始时间：</th>
+    <td><input type="text" name="start" onFocus="WdatePicker({startDate:'%y-%M-%d 00:00:00',dateFmt:'yyyy-MM-dd HH:mm:ss',alwaysUseStartDate:true})"/></td>
+  </tr>
+  <tr>
+    <th align="right">结束时间：</th>
+    <td><input type="text" name="end" onFocus="WdatePicker({startDate:'%y-%M-%d 00:00:00',dateFmt:'yyyy-MM-dd HH:mm:ss',alwaysUseStartDate:true})"/></td>
+  </tr>
 	<tr>
    	  <th width="100">客户</th>
       <td>
-        <select name="member_id" id="member_id">
+        <select name="Member" id="Member">
         <?php
 			$member_sql = "Select * FROM member;";
 			$member_result=mysql_query($member_sql);
 			print("<option value=''>全部");
 			while($member_row = mysql_fetch_array($member_result))
 			{
-				print("<option value=".$member_row['member_id'].">".$member_row['member_name']);
+				print("<option value=".$member_row['member_name'].">".$member_row['member_name']);
 			}
 		?>
     	</select>
@@ -100,17 +104,18 @@
   </tr>
 <?php
   $sql  = "Select * FROM bill";
-//  $sql .= " WHERE ";
-//  if(strcmp($Member_id,'')!=0) $sql .= "goods.member_id='".$Member_id."' and ";
-//  if(strcmp($Goods_HuoWu,'')!=0) $sql .= "goods.goods_name='".$Goods_HuoWu."' and ";
-//  if(strcmp($Goods_GuiGe,'')!=0) $sql .= "goods.goods_GuiGe='".$Goods_GuiGe."' and ";
-//  $sql .= "member.member_id=goods.member_id";
+  $sql .= " WHERE ";
+  $sql .= "bill_GuoBang2 >= '".$Start."' and "; // 开始时间
+  $sql .= "bill_GuoBang2 <= '".$End."'"; // 结束时间
+  if(strcmp($Member,'')!=0) $sql .= " and bill_DanWei='".$Member."'";
+  if(strcmp($Goods_HuoWu,'')!=0) $sql .= " and bill_HuoWu='".$Goods_HuoWu."'";
+  if(strcmp($Goods_GuiGe,'')!=0) $sql .= " and bill_GuiGe='".$Goods_GuiGe."'";
   $sql .= ";";
 
   $result=mysql_query($sql); // 执行SQL语句
   while($row = mysql_fetch_array($result)) // 循环每条记录
   {
-	print("<tr onclick=OnSelect('".$row['bill_id']."');>");
+	print("<tr onclick=OnSelect('".$row['bill_id']."','".$row['bill_DanHao']."','".$row['bill_CheHao']."','".$row['bill_DanWei']."','".$row['bill_HuoWu']."','".$row['bill_GuiGe']."');>");
  	print("  <td>".$row['bill_DanHao']."</td>");
 	print("  <td>".$row['bill_CheHao']."</td>");
   	print("  <td>".$row['bill_DanWei']."</td>");
@@ -147,46 +152,37 @@
   </tr>
   <tr>
     <td align="center">编号：</td>
-    <td><input name="id" type="text" disabled="disabled" id="id" readonly="readonly" /></td>
+    <td><input name="id" type="text" id="id" readonly="readonly" /></td>
   </tr>
   <tr>
-    <td align="center">客户：</td>
-    <td><input type="text" name="Member" id="Member" />
-    这是编号</td>
+    <td align="center">单号：</td>
+    <td><input type="text" name="DanHao" id="DanHao" readonly="readonly" /></td>
   </tr>
   <tr>
-    <td align="center">货物：</td>
-    <td><input type="text" name="HuoWu" id="HuoWu" /></td>
-  </tr>
-  <tr>
-    <td align="center">规格：</td>
-    <td><input type="text" name="GuiGe" id="GuiGe" /></td>
-  </tr>
-  <tr>
-    <td align="center">密度：</td>
-    <td><input type="text" name="MiDu" id="MiDu" /></td>
-  </tr>
-  <tr>
-    <td align="center">单价：</td>
-    <td><input type="text" name="DanJia" id="DanJia" /></td>
+    <td align="center">车号：</td>
+    <td><input type="text" name="CheHao" id="CheHao" readonly="readonly" /></td>
   </tr>
   <tr>
     <td align="center">单位：</td>
-    <td><input type="text" name="DanWei" id="DanWei" /></td>
+    <td><input type="text" name="DanWei" id="DanWei" readonly="readonly" /></td>
   </tr>
   <tr>
-    <td align="center">车型：</td>
-    <td><input type="text" name="CheXing" id="CheXing" /></td>
+    <td align="center">货物：</td>
+    <td><input type="text" name="HuoWu" id="HuoWu" readonly="readonly" /></td>
+  </tr>
+  <tr>
+    <td align="center">规格：</td>
+    <td><input type="text" name="GuiGe" id="GuiGe" readonly="readonly" /></td>
   </tr>
   <tr>
     <td colspan="2"><table width="100%" border="0">
       <tr>
-          <th scope="col"><input type="button" name="Add" id="Add" value="添加" onclick="OnAdd();" /></th>
-          <th scope="col"><input type="button" name="Update" id="Update" value="编辑" onclick="OnUpdate();" /></th>
-          <th scope="col"><input type="button" name="Del" id="Del" value="删除" onclick="OnDel();" /></th>
+        <th scope="col">&nbsp;</th>
+        <th scope="col"><input type="button" name="Del" id="Del" value="删除" onclick="OnDel();" /></th>
+        <th scope="col">&nbsp;</th>
         </tr>
-    </table></td>
-    </tr>
+      </table></td>
+  </tr>
 </table>
 </form>
 </body>

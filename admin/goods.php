@@ -30,7 +30,7 @@
 	
 	function OnDel()
 	{
-		document.form1.action = "api/goode_del.php";
+		document.form1.action = "api/goods_del.php";
 		document.form1.submit(); // 提交按钮
 	}
 
@@ -144,7 +144,7 @@
   </tr>
   <tr>
     <td align="center">编号：</td>
-    <td><input name="id" type="text" disabled="disabled" id="id" readonly="readonly" /></td>
+    <td><input name="id" type="text" id="id" readonly="readonly" /></td>
   </tr>
   <tr>
     <td align="center">客户：</td>

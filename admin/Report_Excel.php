@@ -223,7 +223,8 @@
 			$objPHPExcel->setActiveSheetIndex(0)
 			->setCellValue('A'.$excel_pos, '=SUM(ROW()-ROW(A'.$XiaoJi_Pos.':H'.$XiaoJi_Pos.'))') // 通过行计算编号
 			->setCellValue('B'.$excel_pos, $bill_row['bill_DanHao']) // 单号
-			->setCellValue('C'.$excel_pos, $bill_row['bill_CheHao']) // 车号
+//			->setCellString('C'.$excel_pos, $bill_row['bill_CheHao']) // 车号
+			->setCellValueExplicit('C'.$excel_pos, $bill_row['bill_CheHao'], PHPExcel_Cell_DataType::TYPE_STRING) // 车号
 			->setCellValue('D'.$excel_pos, $bill_row['bill_CheXing']) // 车型
 			->setCellValue('E'.$excel_pos, $bill_row['bill_DanWei']) // 单位
 			->setCellValue('F'.$excel_pos, $type_row['type_HuoWu']) // 货物

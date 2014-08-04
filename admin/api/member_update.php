@@ -9,6 +9,7 @@
 //
 	include '../../session.inc';
 	include '../../conn.php';
+	$Id = $_GET['id'];
 	$Name = $_GET['Name'];
 	$DianHua = $_GET['DianHua'];
 	$YuE = $_GET['YuE'];
@@ -17,10 +18,12 @@
 	$sql  = "UPDATE member SET ";
 	$sql .= "member_DianHua='".$DianHua."',"; // 会员电话
 	$sql .= "member_YuE='".$YuE."',"; // 会员余额
-	$sql .= "member_Type='".$Type."'"; // 会员类型
-	$sql .= " WHERE ";
+	$sql .= "member_Type='".$Type."',"; // 会员类型
 	$sql .= "member_name='".$Name."'"; // 会员名称
+	$sql .= " WHERE ";
+	$sql .= "member_id='".$Id."'";
 	$sql .= ";";
+	print($sql);
 	
 	if(inject_check($sql))
 	{

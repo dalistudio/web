@@ -10,7 +10,15 @@
 	$Pwd  = $_POST['pwd'];   // 密码
 	$Level= $_POST['level']; // 级别
 	$User = iconv('GB2312', 'UTF-8', $User); // 中文转码
-	
+
+// 注销session
+if($_GET['logout'] == 'yes')
+{    
+    unset($_SESSION['name']);
+    header('Location: /admin/index.php');
+	die();
+}
+
 	// 检查登陆信息
 function check_auth($User,$Pwd,$Level)
 {
