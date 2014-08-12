@@ -68,7 +68,7 @@
                 if(mysql_query($sql,$conn)) // 执行插入单据表
                     print("post1"); // 成功
                 else
-                    print("POST1 ERROR:". mysql_error()); // 失败
+                    print("ERROR POST1:". mysql_error()); // 失败
             }
             
             // 更新车辆信息表
@@ -106,7 +106,7 @@
                 if(mysql_query($sql,$conn)) // 更新单据表
                     print("post2"); // 成功
                 else
-                    print("POST2 ERROR:". mysql_error()); // 失败
+                    print("ERROR POST2:". mysql_error()); // 失败
             }
             
             // 判断如果是预存客户，需要减去相应费用。
@@ -179,7 +179,7 @@
                 if(mysql_query($sql,$conn)) // 更新单据表
                     print("post3"); // 成功
                 else
-                    print("POST3 ERROR:". mysql_error()); // 失败
+                    print("ERROR POST3:". mysql_error()); // 失败
             }
 			break;
 		}
@@ -200,7 +200,7 @@
                 if(mysql_query($sql,$conn)) // 更新单据表
                     print("post8"); // 成功
                 else
-                    print("POST8 ERROR:". mysql_error()); // 失败
+                    print("ERROR POST8:". mysql_error()); // 失败
             }
             mysql_close($conn); // 关闭数据库连接
             break;
