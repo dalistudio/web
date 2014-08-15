@@ -4,6 +4,13 @@
 //
 	include '../session.inc';
 	include '../conn.php';
+	
+	check_login();
+	if($_SESSION['Level']!=0)
+	{
+		print("无权访问");
+		die();
+	}
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -70,6 +77,12 @@
 		case "2":
 			print("  <td>保安员</td>");
 			break;
+		case "3":
+			print("  <td>财务人员</td>");
+			break;
+		case "4":
+			print("  <td>地磅管理</td>");
+			break;
 	}
   	print("</tr>");
   }
@@ -105,6 +118,8 @@
     <option value="0">管理员
     <option value="1">司磅员
     <option value="2">保安员
+    <option value="3">财务人员
+    <option value="4">地磅管理
     </select></td>
   </tr>
   <tr>

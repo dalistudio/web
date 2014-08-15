@@ -4,6 +4,13 @@
 //
 	include '../session.inc';
 	include '../conn.php';
+	
+	check_login();
+	if($_SESSION['Level']!=0 && $_SESSION['Level']!=3)
+	{
+		print("无权访问");
+		die();
+	}
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">

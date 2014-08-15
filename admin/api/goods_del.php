@@ -20,7 +20,8 @@
 	{
 		if(mysql_query($sql,$conn)) // 执行语句
 		{
-			echo("客户价目删除成功~"); // 执行成功
+//			echo("客户价目删除成功~"); // 执行成功
+			header('Location: /admin/goods.php');
 		}
 		else
 		{

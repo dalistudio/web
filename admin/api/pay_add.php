@@ -31,7 +31,8 @@
 	{
 		if(mysql_query($sql,$conn)) // 执行语句
 		{
-			echo("支付表添加成功~"); // 执行成功
+//			echo("支付表添加成功~"); // 执行成功
+			header('Location: /admin/pay.php');
 		}
 		else
 		{

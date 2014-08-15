@@ -21,6 +21,7 @@
 		if(mysql_query($sql,$conn)) // 执行语句
 		{
 			echo("过磅单删除成功~"); // 执行成功
+//			header('Location: /admin/bill.php');
 		}
 		else
 		{

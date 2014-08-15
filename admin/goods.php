@@ -5,6 +5,13 @@
 	include '../session.inc';
 	include '../conn.php';
 	
+	check_login();
+	if($_SESSION['Level']!=0 && $_SESSION['Level']!=4)
+	{
+		print("无权访问");
+		die();
+	}
+	
 	$Member_id = $_POST['member_id'];
 	$Goods_HuoWu = $_POST['goods_HuoWu'];
 	$Goods_GuiGe = $_POST['goods_GuiGe'];
@@ -178,9 +185,25 @@
   <tr>
     <td colspan="2"><table width="100%" border="0">
       <tr>
-          <th scope="col"><input type="button" name="Add" id="Add" value="添加" onclick="OnAdd();" /></th>
-          <th scope="col"><input type="button" name="Update" id="Update" value="编辑" onclick="OnUpdate();" /></th>
-          <th scope="col"><input type="button" name="Del" id="Del" value="删除" onclick="OnDel();" /></th>
+          <th scope="col">
+          <input type="button" name="Add" id="Add" value="添加" onclick="OnAdd();" />
+          </th>
+          <th scope="col">
+          <?php
+		  if($_SESSION['Level']==0)
+		  {
+          		print('<input type="button" name="Update" id="Update" value="编辑" onclick="OnUpdate();" />');
+		  }
+		  ?>
+          </th>
+          <th scope="col">
+          <?php
+		  if($_SESSION['Level']==0)
+		  {
+          		print('<input type="button" name="Del" id="Del" value="删除" onclick="OnDel();" />');
+		  }
+		  ?>
+          </th>
         </tr>
     </table></td>
     </tr>

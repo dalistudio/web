@@ -20,7 +20,8 @@
 	{
 		if(mysql_query($sql,$conn)) // 执行语句
 		{
-			echo("类型删除成功~"); // 执行成功
+//			echo("类型删除成功~"); // 执行成功
+			header('Location: /admin/type.php');
 		}
 		else
 		{

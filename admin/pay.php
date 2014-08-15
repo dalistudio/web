@@ -5,6 +5,13 @@
 	include '../session.inc';
 	include '../conn.php';
 	
+	check_login();
+	if($_SESSION['Level']!=0)
+	{
+		print("无权访问");
+		die();
+	}
+	
 	$Start = $_POST['start']; // 开始时间
 	$End = $_POST['end']; // 结束时间
 	$Member_name = $_POST['member']; // 客户名

@@ -4,28 +4,28 @@
 //
 
 //
-// 门禁卡 - 数据表
-// 删除 - 根据卡号删除记录
+// 车辆表 - 数据表
+// 清理
 //
 	include '../../session.inc';
 	include '../../conn.php';
-	$KaHao = $_GET['KaHao'];
+	check_login();
+	if($_SESSION['Level']!=0)
+	{
+		print("无权访问");
+		die();
+	}
 	
-	$sql  = "DELETE FROM card ";
-	$sql .= " WHERE ";
-	$sql .= "card_KaHao='".$KaHao."'"; // 卡号
-	$sql .= ";";
-	
+	$sql = "TRUNCATE TABLE car;";
 	if(inject_check($sql))
 	{
 		if(mysql_query($sql,$conn)) // 执行语句
 		{
-//			echo("门禁卡删除成功~"); // 执行成功
-			header('Location: /admin/card.php');
+			echo("车辆表清理干净~"); // 执行成功
 		}
 		else
 		{
-			echo("门禁卡删除失败！！！\n");
+			echo("车辆清理失败！！！\n");
 			echo("ERROR：". mysql_error()); // 执行失败
 		}
 	}

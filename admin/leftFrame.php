@@ -3,7 +3,6 @@
 // Copyright (c) 2014, wangdali <wangdali@qq.com>, All Rights Reserved.
 //
     include '../session.inc';
-//	check_login();
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -24,12 +23,25 @@
       <tr>
         <td width="51"><div align="center">账号：</div></td>
         <td width="87"><div align="center">
-          <?=$_SESSION['name']?>
+          <?=$_SESSION['User']?>
           </div></td>
         </tr>
       <tr>
         <td><div align="center">级别：</div></td>
-        <td><div align="center"><?=$_SESSION['level']?></div></td>
+        <td><div align="center">
+		<?php
+        	$Level = $_SESSION['Level'];
+
+			switch($Level)
+			{
+				case 0: echo("管理员"); break;
+				case 1: echo("司磅员"); break;
+				case 2: echo("保安员"); break;
+				case 3: echo("财务人员"); break;
+				case 4: echo("地磅管理"); break;
+			}
+		?>
+        </div></td>
         </tr>
     </table></td>
   </tr>

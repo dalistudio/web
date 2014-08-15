@@ -4,6 +4,12 @@
 //
 	include '../session.inc';
 	include '../conn.php';
+	check_login();
+	if($_SESSION['Level']!=0)
+	{
+		print("无权访问");
+		die();
+	}
 	
 	$Start = $_POST['start'];
 	$End = $_POST['end'];
@@ -148,7 +154,7 @@
 <form id="form1" name="form1" method="get" action="">
 <table class="tbl" width="300" border="1">
   <tr>
-  	<th colspan="2">价目数据</th>
+  	<th colspan="2">过磅单数据</th>
   </tr>
   <tr>
     <td align="center">编号：</td>
