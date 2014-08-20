@@ -13,7 +13,9 @@
 	
 	$Start = $_POST['start'];
 	$End = $_POST['end'];
+	$DanHao = $_POST['DanHao'];
 	$Member = $_POST['Member'];
+	$CheHao = $_POST['CheHao'];
 	$Goods_HuoWu = $_POST['goods_HuoWu'];
 	$Goods_GuiGe = $_POST['goods_GuiGe'];
 ?>
@@ -59,6 +61,11 @@
     <th align="right">结束时间：</th>
     <td><input type="text" name="end" onFocus="WdatePicker({startDate:'%y-%M-%d 00:00:00',dateFmt:'yyyy-MM-dd HH:mm:ss',alwaysUseStartDate:true})"/></td>
   </tr>
+  <tr>
+    	<th>单号</th>
+        <td><input name="DanHao" type="text" />
+        </td>
+    </tr>
 	<tr>
    	  <th width="100">客户</th>
       <td>
@@ -73,6 +80,11 @@
 			}
 		?>
     	</select>
+        </td>
+    </tr>
+    <tr>
+    	<th>车号</th>
+        <td><input name="CheHao" type="text" />
         </td>
     </tr>
     <tr>
@@ -111,11 +123,21 @@
 <?php
   $sql  = "Select * FROM bill";
   $sql .= " WHERE ";
-  $sql .= "bill_GuoBang2 >= '".$Start."' and "; // 开始时间
-  $sql .= "bill_GuoBang2 <= '".$End."'"; // 结束时间
-  if(strcmp($Member,'')!=0) $sql .= " and bill_DanWei='".$Member."'";
-  if(strcmp($Goods_HuoWu,'')!=0) $sql .= " and bill_HuoWu='".$Goods_HuoWu."'";
-  if(strcmp($Goods_GuiGe,'')!=0) $sql .= " and bill_GuiGe='".$Goods_GuiGe."'";
+  if(strcmp($Start,'')!=0) $sql .= "bill_GuoBang2 >= '".$Start."' and "; // 开始时间
+  if(strcmp($End,'')!=0) $sql .= "bill_GuoBang2 <= '".$End."' and "; // 结束时间
+  if(strcmp($DanHao,'')!=0) $sql .= "bill_DanHao='".$DanHao."' and "; // 单号
+  if(strcmp($Member,'')!=0) $sql .= "bill_DanWei='".$Member."' and "; // 客户
+  if(strcmp($CheHao,'')!=0) $sql .= "bill_CheHao='".$CheHao."' and "; // 车号
+  if(strcmp($Goods_HuoWu,'')!=0) $sql .= "bill_HuoWu='".$Goods_HuoWu."' and "; // 货物
+  if(strcmp($Goods_GuiGe,'')!=0) $sql .= "bill_GuiGe='".$Goods_GuiGe."' and "; // 规格
+  if(strcmp($Start,'')!=0 || strcmp($End,'')!=0 || strcmp($DanHao,'')!=0 || strcmp($Member,'')!=0 || strcmp($CheHao,'')!=0 || strcmp($Goods_HuoWu,'')!=0 || strcmp($Goods_GuiGe,'')!=0)
+  {
+	  $sql .= "1=1";
+  }
+  else
+  {
+	  $sql .= "1=0";
+  }
   $sql .= ";";
 
   $result=mysql_query($sql); // 执行SQL语句

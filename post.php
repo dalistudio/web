@@ -166,6 +166,7 @@
             $sql .= "bill_HuoWu="."'".$HuoWu."',"; // 货物
             $sql .= "bill_GuiGe="."'".$GuiGe."',"; // 规格
 			$sql .= "bill_DianHua="."'".$Arr['DianHua']."',"; // 电话
+			$sql .= "bill_PiZhong="."'".$PiZhong."',"; // 皮重
             $sql .= "bill_YuE="."'".$Arr['YuE']."',"; // 余额
             $sql .= "bill_MiDu="."'".$Arr['MiDu']."',"; // 密度
             $sql .= "bill_DanJiaDanWei="."'".$Arr['DanWei']."',"; // 单价单位

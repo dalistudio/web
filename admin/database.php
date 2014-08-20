@@ -89,7 +89,7 @@
     <tr>
     	<th>过磅单编号：</th>
         <td><input id="sys" name="sys" type="button" value="设置单号 = 100000" disabled="disabled" /> 
-        sys表</td>
+        sys表 十万以下的单号保留给门禁卡使用</td>
     </tr>
     <tr>
     	<th>过磅单数据：</th>
