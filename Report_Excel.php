@@ -211,22 +211,21 @@
 		if(strcmp($GuiGe2,'')!=0)$bill_sql .= "bill_GuiGe='".$GuiGe2."' and "; // 规格
 		if(strcmp($Type,'')!=0)$bill_sql .= "bill_Type='".$Type."' and "; // 支付类型
 		if(strcmp($SiBangYuan,'')!=0)$bill_sql .= "bill_SiBangYuan='".$SiBangYuan."' and "; // 司磅员
-		$bill_sql .= "bill_JinE<>0"; // 金额不等于0
+		$bill_sql .= "bill_ZhuangTai=1"; // 完成第二次过磅的单
 		$bill_sql .= " ORDER BY bill_HuoWu DESC "; // 按货物进行排序
 		$bill_sql .= ";";
 	
 //		print($bill_sql.'<br />');
 
 		$bill_result = mysql_query($bill_sql); // 执行SQL语句
-		$XiaoJi_JinE = 0; // 小计金额
+		$XiaoJi_Dun = 0; // 小计吨
 		$XiaoJi_Pos = $excel_pos-1;
 		while($bill_row = mysql_fetch_array($bill_result)) // 循环每条记录
 		{
 			// 这里显示表的内容
 			$objPHPExcel->setActiveSheetIndex(0)
 			->setCellValue('A'.$excel_pos, '=SUM(ROW()-ROW(A'.$XiaoJi_Pos.':H'.$XiaoJi_Pos.'))') // 通过行计算编号
-			->setCellValue('B'.$excel_pos, $bill_row['bill_DanHao']) // 单号
-//			->setCellValue('C'.$excel_pos, "'".$bill_row['bill_CheHao']."'") // 车号		
+			->setCellValue('B'.$excel_pos, $bill_row['bill_DanHao']) // 单号	
 			->setCellValueExplicit('C'.$excel_pos, $bill_row['bill_CheHao'], PHPExcel_Cell_DataType::TYPE_STRING) // 车号	
 			->setCellValue('D'.$excel_pos, $bill_row['bill_CheXing']) // 车型
 			->setCellValue('E'.$excel_pos, $bill_row['bill_DanWei']) // 单位
@@ -251,10 +250,10 @@
 			$objPHPExcel->getActiveSheet()->getStyle('L'.$excel_pos.':L'.$excel_pos)->applyFromArray($styleArray);
 			
 			$excel_pos +=1; // 计算行号
-			$XiaoJi_JinE += $bill_row['bill_JinE']; // 小计金额
+			$XiaoJi_Dun += $bill_row['bill_JingZhong']; // 小计吨
 		} // bill
 		// 输出小计
-		if(strcmp($XiaoJi_JinE,'0')!=0) // 小计金额为0则不输出这个类型
+		if(strcmp($XiaoJi_Dun,'0')!=0) // 小计吨为0则不输出这个类型
 		{
 			$Id +=1;
 			$objPHPExcel->getActiveSheet()->mergeCells('K'.$excel_pos.':L'.$excel_pos);
@@ -265,7 +264,8 @@
 			->setCellValue('G'.$excel_pos, '小计：')
 			->setCellValue('H'.$excel_pos, '=SUM(H'.$XiaoJi_Pos.':H'.$PrePos.')') // 使用公式计算小计
 			->setCellValue('I'.$excel_pos, '=SUM(I'.$XiaoJi_Pos.':I'.$PrePos.')') // 使用公式计算小计
-			->setCellValue('J'.$excel_pos, '=SUM(J'.$XiaoJi_Pos.':J'.$PrePos.')');// 使用公式计算小计
+			->setCellValue('J'.$excel_pos, '=SUM(J'.$XiaoJi_Pos.':J'.$PrePos.')')// 使用公式计算小计
+			; // 结束
 			
 			if($Id==1)
 			{
@@ -298,8 +298,9 @@
 		->setCellValue('G'.$excel_pos, '合计：')
 		->setCellValue('H'.$excel_pos, '=SUM('.$XJD.')')
 		->setCellValue('I'.$excel_pos, '=SUM('.$XJF.')')
-		->setCellValue('J'.$excel_pos, '=SUM('.$XJJ.')');
-		
+		->setCellValue('J'.$excel_pos, '=SUM('.$XJJ.')')
+		; // 结束
+			
 	$objPHPExcel->getActiveSheet()->getStyle('A'.$excel_pos.':G'.$excel_pos)->applyFromArray($styleArrayBold);
 	$objPHPExcel->getActiveSheet()->getStyle('H'.$excel_pos.':H'.$excel_pos)->applyFromArray($styleArrayBold);
 	$objPHPExcel->getActiveSheet()->getStyle('I'.$excel_pos.':I'.$excel_pos)->applyFromArray($styleArrayBold);

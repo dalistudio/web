@@ -208,14 +208,15 @@
 		if(strcmp($GuiGe2,'')!=0)$bill_sql .= "bill_GuiGe='".$GuiGe2."' and "; // 规格
 		if(strcmp($Type,'')!=0)$bill_sql .= "bill_Type='".$Type."' and "; // 支付类型
 		if(strcmp($SiBangYuan,'')!=0)$bill_sql .= "bill_SiBangYuan='".$SiBangYuan."' and "; // 司磅员
-		$bill_sql .= "bill_JinE<>0"; // 金额不等于0
+//		$bill_sql .= "bill_JinE<>0"; // 金额不等于0
+		$bill_sql .= "bill_ZhuangTai=1"; // 完成第二次过磅的单
 		$bill_sql .= " ORDER BY bill_HuoWu DESC "; // 按货物进行排序
 		$bill_sql .= ";";
 	
 //		print($bill_sql.'<br />');
 
 		$bill_result = mysql_query($bill_sql); // 执行SQL语句
-		$XiaoJi_JinE = 0; // 小计金额
+		$XiaoJi_Dun = 0; // 小计吨
 		$XiaoJi_Pos = $excel_pos-1;
 		while($bill_row = mysql_fetch_array($bill_result)) // 循环每条记录
 		{
@@ -248,10 +249,10 @@
 			$objPHPExcel->getActiveSheet()->getStyle('L'.$excel_pos.':L'.$excel_pos)->applyFromArray($styleArray);
 			
 			$excel_pos +=1; // 计算行号
-			$XiaoJi_JinE += $bill_row['bill_JinE']; // 小计金额
+			$XiaoJi_Dun += $bill_row['bill_JingZhong']; // 小计吨
 		} // bill
 		// 输出小计
-		if(strcmp($XiaoJi_JinE,'0')!=0) // 小计金额为0则不输出这个类型
+		if(strcmp($XiaoJi_Dun,'0')!=0) // 小计金额为0则不输出这个类型
 		{
 			$Id +=1;
 			$objPHPExcel->getActiveSheet()->mergeCells('K'.$excel_pos.':L'.$excel_pos);
