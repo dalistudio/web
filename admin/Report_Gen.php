@@ -49,7 +49,7 @@
 	print('</head>');
 	print('<body>');
 	print('<table width="100%" border="1">');
-	print('<tr><td colspan="10" align="center"><h1>'.$Title.'</h1></td></tr>');
+	print('<tr><td colspan="11" align="center"><h1>'.$Title.'</h1></td></tr>');
 	
 	print('<tr>');
 	print('<td align="right">开始时间：</td>');
@@ -57,6 +57,7 @@
 	print('<td>&nbsp;</td>');
 	print('<td align="right">结束时间：</td>');
 	print('<td align="left" colspan="2">'.$End.'</td>');
+	print('<td>&nbsp;</td>');
 	print('<td>&nbsp;</td>');
 	print('<td align="right">重量：KG</td>');
 	print('<td align="right">单位：元</td>');
@@ -73,6 +74,7 @@
 	print('<td><b>净重</b></td>');
 	print('<td><b>金额</b></td>');
 	print('<td><b>司磅员</b></td>');
+	print('<td><b>第二次过磅时间</b></td>');
 	print('</tr>');
 	//////////////////////////////////////////////////////////////////
 	// 货物类型表
@@ -138,7 +140,8 @@
 		if(strcmp($GuiGe2,'')!=0)$bill_sql .= "bill_GuiGe='".$GuiGe2."' and "; // 规格
 		if(strcmp($Type,'')!=0)$bill_sql .= "bill_Type='".$Type."' and "; // 支付类型
 		if(strcmp($SiBangYuan,'')!=0)$bill_sql .= "bill_SiBangYuan='".$SiBangYuan."' and "; // 司磅员
-		$bill_sql .= "bill_JinE<>0"; // 金额不等于0
+//		$bill_sql .= "bill_JinE<>0"; // 金额不等于0
+		$bill_sql .= "bill_ZhuangTai>=1"; // 完成第二次过磅的单
 		$bill_sql .= " ORDER BY bill_HuoWu DESC "; // 按货物进行排序
 		$bill_sql .= ";";
 	
@@ -193,6 +196,10 @@
 			print($bill_row['bill_SiBangYuan']); // 9、司磅员
 			print('</td>');
 			
+			print('<td>');
+			print($bill_row['bill_GuoBang2']); // 10、第二次过磅时间
+			print('</td>');
+			
 			print('</tr>');
 			
 			$id+=1;
@@ -209,15 +216,17 @@
 			print('<td align="center">'.$XiaoJi_JingZhong.'</td>');
 			print('<td align="center">'.$XiaoJi_JinE.'</td>');
 			print('<td>&nbsp;</td>');
+			print('<td>&nbsp;</td>');
 			print('</tr>');
 		
-			print('<tr><td colspan="10">&nbsp;</td></tr>');
+			print('<tr><td colspan="11">&nbsp;</td></tr>');
 		}
 	} // type
 	print('<tr>');
 	print('<td colspan="7" align="right">合计：</td>');
 	print('<td align="center">'.$HeJi_JingZhong.'</td>');
 	print('<td align="center">'.$HeJi_JinE.'</td>');
+	print('<td>&nbsp;</td>');
 	print('<td>&nbsp;</td>');
 	print('</tr>');
 	

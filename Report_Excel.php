@@ -211,7 +211,7 @@
 		if(strcmp($GuiGe2,'')!=0)$bill_sql .= "bill_GuiGe='".$GuiGe2."' and "; // 规格
 		if(strcmp($Type,'')!=0)$bill_sql .= "bill_Type='".$Type."' and "; // 支付类型
 		if(strcmp($SiBangYuan,'')!=0)$bill_sql .= "bill_SiBangYuan='".$SiBangYuan."' and "; // 司磅员
-		$bill_sql .= "bill_ZhuangTai=1"; // 完成第二次过磅的单
+		$bill_sql .= "bill_ZhuangTai>=1"; // 完成第二次过磅的单
 		$bill_sql .= " ORDER BY bill_HuoWu DESC "; // 按货物进行排序
 		$bill_sql .= ";";
 	
