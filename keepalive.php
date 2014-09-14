@@ -11,8 +11,8 @@
 	$sql  = "Select * FROM bill WHERE ";
 	$sql .= "(";
 	$sql .= "bill_ZhuangTai='0'"; // 第一次提交的单据
-	$sql .= " or ";
-	$sql .= "bill_ZhuangTai='1'"; // 第二次提交的单据
+//	$sql .= " or ";
+//	$sql .= "bill_ZhuangTai='1'"; // 第二次提交的单据
 	$sql .= ")";
 	$sql .= " and ";
 //	$sql .= "TO_DAYS(NOW()) - TO_DAYS(bill_GuoBang1) <= 1"; // 查询1天内的记录
