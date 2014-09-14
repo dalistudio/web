@@ -49,7 +49,7 @@ body {
         <li><a href="pay.php" target="mainFrame">消费管理</a></li>
         <li><a href="report.php" target="mainFrame">账单生成</a></li>
         <li><a href="card.php" target="mainFrame">门禁卡管理</a></li>
-        <li><a href="sms.php" target="mainFrame">短信管理</a></li>
+ <!--       <li><a href="sms.php" target="mainFrame">短信管理</a></li>     -->
         <li><a href="database.php" target="mainFrame">数据库管理</a></li>
         </ul>
         </td>
