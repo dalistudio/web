@@ -63,6 +63,35 @@
 			but_Car.disabled = true;
 		}
 	}
+	
+	function OnSys()
+	{
+		self.location.href="api/sys_update.php?DanHao=100000";
+	}
+	function OnBill()
+	{
+		self.location.href="api/bill_clear.php";
+	}
+	function OnMember()
+	{
+		self.location.href="api/member_clear.php";
+	}
+	function OnPay()
+	{
+		self.location.href="api/pay_clear.php";
+	}
+	function OnType()
+	{
+		self.location.href="api/type_clear.php";
+	}
+	function OnGoods()
+	{
+		self.location.href="api/goods_clear.php";
+	}
+	function OnCar()
+	{
+		self.location.href="api/car_clear.php";
+	}
 </script>
 </head>
 
@@ -88,12 +117,12 @@
     </tr>
     <tr>
     	<th>过磅单编号：</th>
-        <td><input id="sys" name="sys" type="button" value="设置单号 = 100000" disabled="disabled" /> 
+        <td><input id="sys" name="sys" type="button" value="设置单号 = 100000" disabled="disabled" onclick="OnSys();" /> 
         sys表 十万以下的单号保留给门禁卡使用</td>
     </tr>
     <tr>
     	<th>过磅单数据：</th>
-        <td><input id="bill" name="bill" type="button" value="清空数据" disabled="disabled" /> 
+        <td><input id="bill" name="bill" type="button" value="清空数据" disabled="disabled" onclick="OnBill();" /> 
          bill表</td>
     </tr>
    	<tr>
@@ -101,26 +130,26 @@
     </tr>
     <tr>
     	<th>客户数据：</th>
-        <td><input id="member" name="member" type="button" value="清空数据" disabled="disabled" /> member表</td>
+        <td><input id="member" name="member" type="button" value="清空数据" disabled="disabled" onclick="OnMember();" /> member表</td>
     </tr>
     <tr>
     	<th>消费数据：</th>
-        <td><input id="pay" name="pay" type="button" value="清空数据" disabled="disabled" /> pay表</td>
+        <td><input id="pay" name="pay" type="button" value="清空数据" disabled="disabled" onclick="OnPay();" /> pay表</td>
     </tr>
     <tr>
     	<th>货物数据：</th>
-        <td><input id="type" name="type" type="button" value="清空数据" disabled="disabled" /> type表</td>
+        <td><input id="type" name="type" type="button" value="清空数据" disabled="disabled" onclick="OnType();" /> type表</td>
     </tr>
     <tr>
     	<th>价目表数据：</th>
-        <td><input id="goods" name="goods" type="button" value="清空数据" disabled="disabled" /> goods表</td>
+        <td><input id="goods" name="goods" type="button" value="清空数据" disabled="disabled" onclick="OnGoods();" /> goods表</td>
     </tr>
     <tr>
     	<td colspan="2">&nbsp;</td>
     </tr>
     <tr>
     	<th>车辆数据：</th>
-      <td><input id="car" name="car" type="button" value="清空数据" disabled="disabled" />        car表 保存车辆最后一次拉料数据。</td>
+      <td><input id="car" name="car" type="button" value="清空数据" disabled="disabled" onclick="OnCar();" />        car表 保存车辆最后一次拉料数据。</td>
     </tr>
 </table>
 
