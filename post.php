@@ -155,6 +155,18 @@
 				//
 				// 删除相关短信发送代码，禁用此功能。
 				//
+				
+				//
+				// $curlPost = "tel=".$DianHua."&sms=短信内容"; // 设置 POST 的内容
+				//
+				// $ch = curl_init(); // 初始化CURL
+				// curl_setopt($ch,CURLOPT_URL,'http://127.0.0.1:8888/sms'); // 指定网页
+				// curl_setopt($ch, CURLOPT_HEADER, 0); // 设置header
+				// curl_setopt($ch, CURLOPT_RETURNTRANSFER, 0); // 要求结果为字符串,且不输出到屏幕上
+				// curl_setopt($ch, CURLOPT_POST, 1); // POST 提交方式
+				// curl_setopt($ch, CURLOPT_POSTFIELDS, $curlPost); // POST 的内容
+				// $data = curl_exec($ch);//执行CURL
+				// curl_close($ch); // 关闭CURL
             }
         
             mysql_close($conn); // 关闭数据库连接

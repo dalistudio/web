@@ -11,6 +11,8 @@
 		print("无权访问");
 		die();
 	}
+	
+	$Member_name = $_POST['member'];
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -51,6 +53,25 @@
 </head>
 
 <body>
+<form id="Form_Find" method="post" action="member.php">
+<table class="tbl" width="300" border="1">
+	<tr>
+    	<th colspan="2">查询条件</th>
+    </tr>
+	<tr>
+   	  <th width="100">客户名称：</th>
+      <td>
+      <input type="text" name="member" />  
+      </td>
+    </tr>
+    <tr>
+    	<td colspan="2" align="center">
+        <input type="submit" value="查询" />
+        </td>
+  </tr>
+</table>
+</form>
+
 <table class="tbl" width="600" border="1">
   <tr>
     <th width="10%">编号</th>
@@ -60,7 +81,7 @@
     <th width="20%">类型</th>
   </tr>
 <?php
-  $sql  = "Select * FROM member;";
+  $sql  = "Select * FROM member WHERE member_name='".$Member_name."';";
   $result=mysql_query($sql); // 执行SQL语句
   while($row = mysql_fetch_array($result)) // 循环每条记录
   {
