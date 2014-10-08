@@ -86,7 +86,7 @@
 	  $sql  = "Select * FROM member;";
   }else
   {
-	  $sql  = "Select * FROM member WHERE member_name='".$Member_name."';";
+	  $sql  = "Select * FROM member WHERE member_name LIKE '%".$Member_name."%';";
   }
   
   $result=mysql_query($sql); // 执行SQL语句
