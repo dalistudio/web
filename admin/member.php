@@ -81,7 +81,14 @@
     <th width="20%">类型</th>
   </tr>
 <?php
-  $sql  = "Select * FROM member WHERE member_name='".$Member_name."';";
+  if(strcmp($Member_name,"") == 0) // 判断是否有客户POST信息
+  {
+	  $sql  = "Select * FROM member;";
+  }else
+  {
+	  $sql  = "Select * FROM member WHERE member_name='".$Member_name."';";
+  }
+  
   $result=mysql_query($sql); // 执行SQL语句
   while($row = mysql_fetch_array($result)) // 循环每条记录
   {
