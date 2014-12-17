@@ -23,8 +23,9 @@
 //	$HuoWu = ''; // 货物
 //	$GuiGe = ''; // 规格
 	
-	// 错误报告 
-	error_reporting(E_ALL);
+	
+	//error_reporting(E_ALL); // 错误报告
+	error_reporting(0); // 禁止报告所有错误  
 	ini_set('display_errors', TRUE);
 	ini_set('display_startup_errors', TRUE);
 	

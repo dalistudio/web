@@ -176,11 +176,21 @@
   </tr>
   <tr>
     <td align="center">单位：</td>
-    <td><input type="text" name="DanWei" id="DanWei" /></td>
+    <td>
+    	<select name="DanWei" id="DanWei">
+        	<option value="吨">吨</option>
+            <option value="立方">立方</option>
+        </select>
+    </td>
   </tr>
   <tr>
     <td align="center">车型：</td>
-    <td><input type="text" name="CheXing" id="CheXing" /></td>
+    <td>
+    	<select name="CheXing" id="CheXing">
+        	<option value="大车">大车</option>
+            <option value="小车">小车</option>
+        </select>
+    </td>
   </tr>
   <tr>
     <td colspan="2"><table width="100%" border="0">
