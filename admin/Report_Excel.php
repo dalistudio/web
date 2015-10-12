@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 //
 // Copyright (c) 2014, wangdali <wangdali@qq.com>, All Rights Reserved.
 //
@@ -24,6 +24,9 @@
 //	$GuiGe = ''; // 规格
 	
 	
+	// 最大脚本执行时间 500秒
+	ini_set('max_execution_time', '500');
+
 	//error_reporting(E_ALL); // 错误报告
 	error_reporting(0); // 禁止报告所有错误  
 	ini_set('display_errors', TRUE);
