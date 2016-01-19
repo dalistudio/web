@@ -51,7 +51,7 @@ function onPost(id)
   </tr>
   <tr>
     <td align="right">结束时间：</td>
-    <td><input type="text" name="end" onFocus="WdatePicker({startDate:'%y-%M-%d 00:00:00',dateFmt:'yyyy-MM-dd HH:mm:ss',alwaysUseStartDate:true})"/></td>
+    <td><input type="text" name="end" onFocus="WdatePicker({startDate:'%y-%M-%d 23:59:59',dateFmt:'yyyy-MM-dd HH:mm:ss',alwaysUseStartDate:true})"/></td>
   </tr>
   <tr>
     <td width="91" align="right">车号：</td>
@@ -66,7 +66,7 @@ function onPost(id)
     <td>
     <select name="DanWei" id="DanWei">
         <?php
-			$member_sql = "Select * FROM member;";
+			$member_sql = "Select * FROM member order by member_name asc;";
 			$member_result=mysql_query($member_sql);
 			print("<option value=''>");
 			while($member_row = mysql_fetch_array($member_result))

@@ -42,7 +42,40 @@
 			// 第一次过磅
     
 			$Arr = Find_Goods($DanWei,$CheXing,$HuoWu,$GuiGe); // 查询价目表
-
+			
+			//
+			// 给 member 表添加 “信用额度” 和 “警告额度” 的字段
+			// 将新添加的字段加入 Find_Goods() 返回
+			//
+			
+			//
+			// 判断 “警告额度” 和 “余额”，如果超过“警告额度”，则将警告信息写入单据备注“注意：您的余额不足，请尽快缴费。”。
+			// 判断 “信用额度” 和 “余额”，如果超过“信用额度”，则禁止提交单据。
+			//
+			$Type = $Arr['Type']; // 支付类型，只处理预存和月结客户
+			
+			// 如果不是零售客户，则处理
+			if($Type != 0)
+			{
+				$YuE = $Arr['YuE']; // 余额
+				$JingGao = $Arr['JingGao']; // 警告额度
+				$XinYong = $Arr['XinYong']; // 信用额度
+				
+				// 比较余额和警告额度，输出注意信息到备注
+				if(abs($YuE) >= abs($JingGao) && $JingGao != 0.00)
+				{
+					$BeiZhu = "注意：您的余额为 ".$YuE." ，请尽快缴费!!!";
+				}
+				
+				// 比较余额和信用额度，返回“Credit”禁止提交到客户端
+				if(abs($YuE) >= abs($XinYong) && $XinYong != 0.00)
+				{
+					print("Credit");
+					exit(0);
+				}
+			}
+			
+			
             // 插入单据表
             $sql = "INSERT INTO bill SET ";
             $sql .= "bill_GuoBang1="."'".$mysqldate."',"; // 第一次过磅的日期时间
@@ -119,6 +152,7 @@
             {
                 // 最后判定一下是否第二次提交已经完成。
                 // 避免多次提交余额多次扣除。 可以采用先加上金额再扣除金额的方式，以后第三次提交修改后的金额。
+
                 $member = "Select * FROM member WHERE member_name='".$DanWei."';";
                 if(inject_check($member))
                 {
@@ -132,13 +166,15 @@
             	
                 $Member_YuE = $Member_YuE - $JinE; // 余额 = 余额 - 金额
 				
-				// 插入支付表
-				$pay  = "INSERT INTO pay SET ";
-				$pay .= "member_name='".$DanWei."',"; // 客户
-				$pay .= "bill_DanHao='".$DanHao."',"; // 账单号
-				$pay .= "pay_JinE='-".$Member_YuE."',"; // 消费的金额，注意'-'减号
-				$pay .= "pay_date='".$mysqldate."';"; // 消费的时间
-				mysql_query($pay); // 执行SQL语句
+				
+// 屏蔽客户消费记录 2015-05-13
+//				// 插入支付表
+//				$pay  = "INSERT INTO pay SET ";
+//				$pay .= "member_name='".$DanWei."',"; // 客户
+//				$pay .= "bill_DanHao='".$DanHao."',"; // 账单号
+//				$pay .= "pay_JinE='-".$Member_YuE."',"; // 消费的金额，注意'-'减号
+//				$pay .= "pay_date='".$mysqldate."';"; // 消费的时间
+//				mysql_query($pay); // 执行SQL语句
 				
                 // 将余额写入数据库
                 $member  = "UPDATE member SET ";
@@ -146,27 +182,6 @@
                 $member .= " WHERE ";
                 $member .= "member_id='".$Member_id."';"; // 单位
                 mysql_query($member); // 执行SQL语句
-				
-				//
-				// 给预付款客户发送短信功能
-				// 调用CURL 将短信发送到 127.0.0.1 8888端口即可，格式为：
-				// http://127.0.0.1:8888/sms?tel=电话号码&sms=短信内容
-				// 无需等待返回数据，直接断开连接即可。所以不保证发送短信成功。
-				//
-				// 删除相关短信发送代码，禁用此功能。
-				//
-				
-				//
-				// $curlPost = "tel=".$DianHua."&sms=短信内容"; // 设置 POST 的内容
-				//
-				// $ch = curl_init(); // 初始化CURL
-				// curl_setopt($ch,CURLOPT_URL,'http://127.0.0.1:8888/sms'); // 指定网页
-				// curl_setopt($ch, CURLOPT_HEADER, 0); // 设置header
-				// curl_setopt($ch, CURLOPT_RETURNTRANSFER, 0); // 要求结果为字符串,且不输出到屏幕上
-				// curl_setopt($ch, CURLOPT_POST, 1); // POST 提交方式
-				// curl_setopt($ch, CURLOPT_POSTFIELDS, $curlPost); // POST 的内容
-				// $data = curl_exec($ch);//执行CURL
-				// curl_close($ch); // 关闭CURL
             }
         
             mysql_close($conn); // 关闭数据库连接
@@ -188,7 +203,7 @@
             $sql .= "bill_GuiGe="."'".$GuiGe."',"; // 规格
 			$sql .= "bill_DianHua="."'".$Arr['DianHua']."',"; // 电话
 			$sql .= "bill_PiZhong="."'".$PiZhong."',"; // 皮重
-            $sql .= "bill_YuE="."'".$Arr['YuE']."',"; // 余额
+//            $sql .= "bill_YuE="."'".$Arr['YuE']."',"; // 余额 // 2015-12-26 屏蔽改单提交余额
 			$sql .= "bill_Type="."'".$Arr['Type']."',"; // 支付类型
             $sql .= "bill_MiDu="."'".$Arr['MiDu']."',"; // 密度
             $sql .= "bill_DanJiaDanWei="."'".$Arr['DanWei']."',"; // 单价单位
@@ -240,7 +255,13 @@
 		$goods .= "goods.goods_MiDu,"; // 密度
 		$goods .= "member.member_DianHua,"; // 客户电话
 		$goods .= "member.member_YuE,"; // 客户的余额
-		$goods .= "member.member_Type"; // 客户的支付类型 0=零售 1=预付 2=月结
+		$goods .= "member.member_Type,"; // 客户的支付类型 0=零售 1=预付 2=月结
+		//
+		// 在 member 表添加新的字段
+		//
+		$goods .= "member.member_JingGao,"; // 客户的警告额度
+		$goods .= "member.member_XinYong"; // 客户的信用额度
+		
 		$goods .= " FROM ";
 		$goods .= "member,"; // 客户表
 		$goods .= "goods"; // 价目表
@@ -256,7 +277,10 @@
 		$goods .= "goods.goods_CheXing='".$CheXing."'"; // 车型
 		$goods .= ";";
 		$result=mysql_query($goods); // 执行SQL语句
-		if($result)
+
+		$number = mysql_num_rows($result);
+
+		if($result && $number != 0)
 		{
 			$row = mysql_fetch_array($result); // 获得记录
 			$goods_DanJia = $row['goods_DanJia']; // 单价
@@ -265,8 +289,29 @@
 			$member_DianHua = $row['member_DianHua']; // 客户的电话
 			$member_YuE = $row['member_YuE']; // 余额
 			$member_Type = $row['member_Type']; // 支付类型
+			
+			//
+			// 添加新的返回结果到数组
+			//
+			$member_JingGao = $row['member_JingGao']; // 警告额度
+			$member_XinYong = $row['member_XinYong']; // 信用额度
 		}
-		$Arr = array('DanJia'=>$goods_DanJia,'DanWei'=>$goods_DanWei,'MiDu'=>$goods_MiDu,'DianHua'=>$member_DianHua,'YuE'=>$member_YuE,'Type'=>$member_Type);
+		else
+		{
+			// 找不到客户对应的货物价格记录，则打印输出 JiaGe，并退出脚本。
+			print("JiaGe");
+			exit(0);
+		}
+		$Arr = array(
+		'DanJia'=>$goods_DanJia,
+		'DanWei'=>$goods_DanWei,
+		'MiDu'=>$goods_MiDu,
+		'DianHua'=>$member_DianHua,
+		'YuE'=>$member_YuE,
+		'Type'=>$member_Type,
+		'JingGao'=>$member_JingGao,
+		'XinYong'=>$member_XinYong
+		);
 		return $Arr; // 返回数组
 	}
 ?>

@@ -15,9 +15,7 @@
 // 注销session
 if($_GET['logout'] == 'yes')
 {    
-	unset($_SESSION['id']);
-    unset($_SESSION['User']);
-	unset($_SESSION['Level']);
+    unset($_SESSION['name']);
     header('Location: /admin/index.php');
 	die();
 }

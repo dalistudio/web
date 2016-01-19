@@ -51,6 +51,7 @@
 			$member_sql  = "Select * FROM member";
 			$member_sql .= " WHERE ";
 			$member_sql .= "member_Type=1 or member_Type=2"; // 只列出预存和月结客户
+			$member_sql .= " order by member_name asc ";
 			$member_sql .= ";";
 			$member_result=mysql_query($member_sql);
 			print("<option value=''>全部");
@@ -116,7 +117,7 @@
     <td>
         <select name="Member" id="Member">
         <?php
-			$member_sql = "Select * FROM member WHERE member_Type=1;";
+			$member_sql = "Select * FROM member WHERE member_Type=1 order by member_name asc;";
 			$member_result=mysql_query($member_sql);
 			while($member_row = mysql_fetch_array($member_result))
 			{

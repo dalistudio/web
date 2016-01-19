@@ -14,12 +14,16 @@
 	$DianHua = $_GET['DianHua'];
 	$YuE = $_GET['YuE'];
 	$Type = $_GET['Type'];
+	$JingGao = $_GET['JingGao']; // 警告额度
+	$XinYong = $_GET['XinYong']; // 信用额度
 	
 	$sql  = "UPDATE member SET ";
 	$sql .= "member_DianHua='".$DianHua."',"; // 会员电话
 	$sql .= "member_YuE='".$YuE."',"; // 会员余额
 	$sql .= "member_Type='".$Type."',"; // 会员类型
-	$sql .= "member_name='".$Name."'"; // 会员名称
+	$sql .= "member_name='".$Name."',"; // 会员名称
+	$sql .= "member_JingGao='".$JingGao."',"; // 警告额度
+	$sql .= "member_Xinyong='".$XinYong."'"; // 信用额度
 	$sql .= " WHERE ";
 	$sql .= "member_id='".$Id."'";
 	$sql .= ";";

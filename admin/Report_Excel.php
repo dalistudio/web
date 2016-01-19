@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 //
 // Copyright (c) 2014, wangdali <wangdali@qq.com>, All Rights Reserved.
 //
@@ -23,12 +23,11 @@
 //	$HuoWu = ''; // 货物
 //	$GuiGe = ''; // 规格
 	
-	
-	// 最大脚本执行时间 500秒
-	ini_set('max_execution_time', '500');
+// 最大脚本执行时间 秒
+ini_set('max_execution_time', '500');
 
-	//error_reporting(E_ALL); // 错误报告
-	error_reporting(0); // 禁止报告所有错误  
+	// 错误报告 
+	error_reporting(E_ALL);
 	ini_set('display_errors', TRUE);
 	ini_set('display_startup_errors', TRUE);
 	

@@ -11,8 +11,6 @@
 		print("无权访问");
 		die();
 	}
-	
-	$Member_name = $_POST['member'];
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -35,12 +33,16 @@
 	
 	function OnDel()
 	{
-		document.form1.action = "api/member_del.php";
-		document.form1.submit(); // 提交按钮
+		// 确认框
+		var option=confirm("是否真的删除?");//true,false
+		if(option){
+			document.form1.action = "api/member_del.php";
+			document.form1.submit(); // 提交按钮
+		}
 	}
 	
 	// 处理选择行事件
-	function OnSelect(id,name,dianhua,yue,type)
+	function OnSelect(id,name,dianhua,yue,type,jinggao,xinyong)
 	{
 		//alert("test");
 		document.getElementById("id").value=id;
@@ -48,51 +50,29 @@
 		document.getElementById("DianHua").value=dianhua;
 		document.getElementById("YuE").value=yue;
 		document.getElementById("Type").value=type;
+		document.getElementById("JingGao").value=jinggao;
+		document.getElementById("XinYong").value=xinyong;
 	}
 </script>
 </head>
 
 <body>
-<form id="Form_Find" method="post" action="member.php">
-<table class="tbl" width="300" border="1">
-	<tr>
-    	<th colspan="2">查询条件</th>
-    </tr>
-	<tr>
-   	  <th width="100">客户名称：</th>
-      <td>
-      <input type="text" name="member" />  
-      </td>
-    </tr>
-    <tr>
-    	<td colspan="2" align="center">
-        <input type="submit" value="查询" />
-        </td>
-  </tr>
-</table>
-</form>
-
-<table class="tbl" width="600" border="1">
+<table class="tbl" width="700" border="1">
   <tr>
     <th width="10%">编号</th>
-    <th width="30%">名称</th>
-    <th width="20%">电话</th>
-    <th width="20%">余额</th>
-    <th width="20%">类型</th>
+    <th width="20%">名称</th>
+    <th width="15%">电话</th>
+    <th width="15%">余额</th>
+    <th width="10%">类型</th>
+    <th width="15%">警告额度</th>
+    <th width="15%">信用额度</th>
   </tr>
 <?php
-  if(strcmp($Member_name,"") == 0) // 判断是否有客户POST信息
-  {
-	  $sql  = "Select * FROM member;";
-  }else
-  {
-	  $sql  = "Select * FROM member WHERE member_name LIKE '%".$Member_name."%';";
-  }
-  
+  $sql  = "Select * FROM member;";
   $result=mysql_query($sql); // 执行SQL语句
   while($row = mysql_fetch_array($result)) // 循环每条记录
   {
-	print("<tr onclick=OnSelect('".$row['member_id']."','".$row['member_name']."','".$row['member_DianHua']."','".$row['member_YuE']."','".$row['member_Type']."');>");
+	print("<tr onclick=OnSelect('".$row['member_id']."','".$row['member_name']."','".$row['member_DianHua']."','".$row['member_YuE']."','".$row['member_Type']."','".$row['member_JingGao']."','".$row['member_XinYong']."');>");
  	print("  <td>".$row['member_id']."</td>");
   	print("  <td>".$row['member_name']."</td>");
   	print("  <td>".$row['member_DianHua']."</td>");
@@ -109,10 +89,14 @@
 			print("  <td>月结</td>");
 			break;
 	}
+	print("  <td>".$row['member_JingGao']."</td>");
+	print("  <td>".$row['member_XinYong']."</td>");
   	print("</tr>");
   }
 ?>
   <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
     <td>&nbsp;</td>
     <td>&nbsp;</td>
     <td>&nbsp;</td>
@@ -138,10 +122,19 @@
     <td align="center">电话：</td>
     <td><input type="text" name="DianHua" id="DianHua" /></td>
   </tr>
-  <tr>
-    <td align="center">余额：</td>
-    <td><input type="text" name="YuE" id="YuE" /></td>
-  </tr>
+  <?php
+  if($_SESSION['Level']==0){
+	  print('<tr>');
+	  print('  <td align="center">余额：</td>');
+	  print('  <td><input type="text" name="YuE" id="YuE" /></td>');
+	  print('</tr>');
+  }else{
+	  print('<tr>');
+	  print('    <td></td>');
+	  print('    <td><input type="text" name="YuE" id="YuE" value="0" hidden="1" /></td></td>');
+	  print('</tr>');
+  }
+  ?>
   <tr>
     <td align="center">类型：</td>
     <td><select name="Type" id="Type">
@@ -150,7 +143,19 @@
     <option value="2">月结
     </select></td>
   </tr>
-  <tr>
+  <?php
+  if($_SESSION['Level']==0){
+  	print('<tr>');
+    print('	<td align="center">警告额度：</td>');
+    print('	<td><input type="text" name="JingGao" id="JingGao" /></td>');
+  	print('</tr>');
+  	print('<tr>');
+    print('	<td align="center">信用额度：</td>');
+    print('	<td><input type="text" name="XinYong" id="XinYong" /></td>');
+  	print('</tr>');
+  }
+  ?>
+  	<tr>
     <td colspan="2"><table width="100%" border="0">
       <tr>
           <th scope="col"><input type="button" name="Add" id="Add" value="添加" onclick="OnAdd();" /></th>

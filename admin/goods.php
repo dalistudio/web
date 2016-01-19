@@ -68,7 +68,7 @@
       <td>
         <select name="member_id" id="member_id">
         <?php
-			$member_sql = "Select * FROM member;";
+			$member_sql = "Select * FROM member order by member_name asc;";
 			$member_result=mysql_query($member_sql);
 			print("<option value=''>全部");
 			while($member_row = mysql_fetch_array($member_result))

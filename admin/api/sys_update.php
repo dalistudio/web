@@ -9,14 +9,13 @@
 //
 	include '../../session.inc';
 	include '../../conn.php';
-	$DanHao = $_REQUEST['DanHao'];
+	$DanHao = $_GET['DanHao'];
 	
 	$sql  = "UPDATE sys SET ";
 	$sql .= "sys_DanHao='".$DanHao."'"; // 单号
 	$sql .= " WHERE ";
-	$sql .= "sys_id='1'";
+	$sql .= "sys_id=1";
 	$sql .= ";";
-//	echo($sql);
 	
 	if(inject_check($sql))
 	{
@@ -30,6 +29,6 @@
 			echo("ERROR：". mysql_error()); // 执行失败
 		}
 	}
-	echo(mysql_affected_rows());
+
 	mysql_close($conn); // 关闭数据库连接
 ?>
