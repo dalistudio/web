@@ -6,7 +6,8 @@
 	include '../conn.php';
 	
 	check_login();
-	if($_SESSION['Level']!=0 && $_SESSION['Level']!=4)
+	// 0=管理员； 1=地磅； 2=门岗； 3=财务人员； 4=地磅管理；
+	if($_SESSION['Level']!=0 && $_SESSION['Level']!=3 && $_SESSION['Level']!=4)
 	{
 		print("无权访问");
 		die();
@@ -158,7 +159,13 @@
   	<tr>
     <td colspan="2"><table width="100%" border="0">
       <tr>
-          <th scope="col"><input type="button" name="Add" id="Add" value="添加" onclick="OnAdd();" /></th>
+          <th scope="col">
+	  <?php
+		if($_SESSION['Level']==0 || $_SESSION['Level']==4)
+		{
+		 	print('<input type="button" name="Add" id="Add" value="添加" onclick="OnAdd();" /></th>');
+		}
+	  ?>
           <th scope="col">
           <?php
 		  if($_SESSION['Level']==0)
@@ -171,7 +178,7 @@
            <?php
 		  if($_SESSION['Level']==0)
 		  {
-              print('<input type="button" name="Del" id="Del" value="删除" onclick="OnDel();" />');
+              		print('<input type="button" name="Del" id="Del" value="删除" onclick="OnDel();" />');
 		  }
 		  ?>
           </th>
