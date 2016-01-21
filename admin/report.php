@@ -33,6 +33,22 @@ function onPost(id)
 		form1.submit(); 
 	}
 }
+
+function onPost2(id)
+{
+	if(id==1)
+	{
+		// 查询
+		form2.action="Report_Member.php";
+		form2.submit(); 
+	}
+	if(id==2)
+	{
+		// 下载
+		form2.action="Report_Member_Excel.php";
+		form2.submit(); 
+	}
+}
 </script>
 <script src="/js/WdatePicker.js"></script> 
 <title>生成财务报表</title>
@@ -110,5 +126,35 @@ function onPost(id)
 </table>
 
 </form>
+
+
+
+<form id="form2" name="form1" method="post" action="Report_Member.php">
+  <br />
+<table class="tbl" width="300" border="0">
+  <tr>
+    <th colspan="2" scope="col">按客户合计生成报表</th>
+    </tr>
+  <tr>
+    <td align="right">开始时间：</td>
+    <td><input type="text" name="start" onFocus="WdatePicker({startDate:'%y-%M-%d 00:00:00',dateFmt:'yyyy-MM-dd HH:mm:ss',alwaysUseStartDate:true})"/></td>
+  </tr>
+  <tr>
+    <td align="right">结束时间：</td>
+    <td><input type="text" name="end" onFocus="WdatePicker({startDate:'%y-%M-%d 23:59:59',dateFmt:'yyyy-MM-dd HH:mm:ss',alwaysUseStartDate:true})"/></td>
+  </tr>
+    <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td align="center"><input type="button" value="查询" onclick="onPost2(1);" /></td>
+    <td><input type="button" value="下载" onclick="onPost2(2);" />
+    (注：生成需要10秒)</td>
+  </tr>
+</table>
+
+</form>
+
 </body>
 </html>

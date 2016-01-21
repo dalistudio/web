@@ -54,25 +54,22 @@
 			//
 			$Type = $Arr['Type']; // 支付类型，只处理预存和月结客户
 			
-			// 预存款客户
-			if($Type == 1)
+			// 预存款客户 || 月结款客户
+			if($Type == 1 || $Type == 2)
 			{
 				$YuE = $Arr['YuE']; // 余额
 				$JingGao = $Arr['JingGao']; // 警告额度
 				$XinYong = $Arr['XinYong']; // 信用额度
 				
 				// 比较余额和警告额度，输出注意信息到备注
-				if(abs($YuE) >= abs($JingGao) && $JingGao != 0.00)
+				if($YuE <= $JingGao && $JingGao != 0.00)
 				{
-					// 余额 大于等于 警告额度的时候，不需要打印警告信息。
-					
-				}else{
 					// 余额 小于 警告额度的时候，则打印警告信息
 					$BeiZhu = "注意：您的余额为 ".$YuE." ，请尽快缴费!!!";
 
 					// 并判断 余额是否小于 信用额度
 					// 比较余额和信用额度，返回“Credit”禁止提交到客户端
-					if(abs($YuE) <= abs($XinYong) && $XinYong != 0.00)
+					if($YuE <= $XinYong && $XinYong != 0.00)
 					{
 						print("Credit");
 						exit(0);
@@ -80,32 +77,6 @@
 				}
 			} // endif
 
-			//月结款客户
-			if($Type == 2)
-			{
-				$YuE = $Arr['YuE']; // 余额
-				$JingGao = $Arr['JingGao']; // 警告额度
-				$XinYong = $Arr['XinYong']; // 信用额度
-				
-				// 比较余额和警告额度，输出注意信息到备注
-				if(abs($YuE) <= abs($JingGao) && $JingGao != 0.00)
-				{
-					// 余额 大于等于 警告额度的时候，不需要打印警告信息。
-					
-				}else{
-					// 余额 小于 警告额度的时候，则打印警告信息
-					$BeiZhu = "注意：您的余额为 ".$YuE." ，请尽快缴费!!!";
-
-					// 并判断 余额是否小于 信用额度
-					// 比较余额和信用额度，返回“Credit”禁止提交到客户端
-					if(abs($YuE) >= abs($XinYong) && $XinYong != 0.00)
-					{
-						print("Credit");
-						exit(0);
-					}
-				}
-			} // endif
-			
 			
             // 插入单据表
             $sql = "INSERT INTO bill SET ";
