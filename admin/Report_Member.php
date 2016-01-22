@@ -27,17 +27,18 @@
 		print('<body>');
 
 		print('<table border="1" width="900">');
-		print('<tr align="center"><td colspan="5">海南证拓投资有限公司</td></tr>');
-		print('<tr align="center"><td colspan="5">港口文峰石场分公司 -- 销售统计报表</td></tr>');
-		print('<tr align="right"><td colspan="5">'.$Start.' 至 '.$End.'</td></tr>');
-		print('<tr align="center"><td colspan="5">&nbsp;</td></tr>');
-		print('<tr align="center"><td colspan="5">'.$HeJi.'</td></tr>');
+		print('<tr align="center"><td colspan="6">海南证拓投资有限公司</td></tr>');
+		print('<tr align="center"><td colspan="6">港口文峰石场分公司 -- 销售统计报表</td></tr>');
+		print('<tr align="right"><td colspan="6">'.$Start.' 至 '.$End.'</td></tr>');
+		print('<tr align="center"><td colspan="6">&nbsp;</td></tr>');
+		print('<tr align="center"><td colspan="6">'.$HeJi.'</td></tr>');
 
 		print('<tr align="center">');
 		print('<td>序号</td>');
 		print('<td>客户名</td>');
 		print('<td>类型</td>');
 		print('<td>销量(吨)</td>');
+		print('<td>金额(元)</td>');
 		print('<td>销量比(%)</td>');
 		print('</tr>');
 	}
@@ -46,21 +47,23 @@
 	// 输出 表内容的标题头
 	// $Context 合并所有列，输出一条内容的记录
 	function get_Body_Head($Context) {
-		print('<tr align="center"><td colspan="5">'.$Context.'</td></tr>');
+		print('<tr align="center"><td colspan="6">'.$Context.'</td></tr>');
 	}
 
 	////////////////////
 	// 输出 表内容的小计
 	// $Weight 某类型的小计销售重量
+	// $Money  某类型的小计金额
 	// $PCT     此类型占总计的比重
-	function get_Body_HJ($Weight,$PCT) {
+	function get_Body_HJ($Weight, $Money, $PCT) {
 		print('<tr>');
 		print('<td align="right" colspan="3">小计：</td>');
 		print('<td align="center">'.$Weight.'</td>');
+		print('<td align="center">'.$Money.'</td>');
 		print('<td align="center">'.$PCT.'</td>');
 		print('</tr>');
 
-		print('<tr align="center"><td colspan="5">&nbsp;</td></tr>');
+		print('<tr align="center"><td colspan="6">&nbsp;</td></tr>');
 	}
 
 	////////////////////
@@ -69,8 +72,9 @@
 	// $Name   客户名称
 	// $Type   客户的类型
 	// $Weight 销售（吨）
+	// $Money  金额（元）
 	// $PCT     销售比（%）
-	function get_Body($Id, $Name, $Type, $Weight, $PCT) {
+	function get_Body($Id, $Name, $Type, $Weight, $Money, $PCT) {
 		if($Weight == 0) return;
 		switch($Type) {
 			case 0 : 
@@ -89,6 +93,7 @@
 		print('<td>'.$Name.'</td>');
 		print('<td>'.$TypeName.'</td>');
 		print('<td>'.$Weight.'</td>');
+		print('<td>'.$Money.'</td>');
 		print('<td>'.$PCT .'</td>');
 		print('</tr>');
 	}
@@ -126,10 +131,37 @@
 	}
 
 //	print(get_HeJi($Start, $End));
+
+
+	//////////////////
+	// 2、累计 时间段和完整单据 的净重值，作为 “净重总合计”
+	//   SELECT sum(bill_JingZhong)
+	//       FROM stone.bill WHERE 
+	//            bill_ZhuangTai>=1 AND 
+	//            bill_GuoBang2>="2015-12-01" AND 
+	//            bill_GuoBang2<="2015-12-31";
+	function get_JinE_HeJi($Start, $End) {
+		$SQL = ' SELECT sum(bill_JinE) FROM stone.bill WHERE
+			bill_ZhuangTai>=1 AND
+			bill_GuoBang2>="'.$Start.'" AND 
+			bill_GuoBang2<="'.$End.'";
+		';
+
+		$Result=mysql_query($SQL);
+		while($row=mysql_fetch_array($Result))
+		{
+			// 合计此时间段内所有符合状态的单据 净重的总和，并转换为吨。
+			$HeJi = $row['sum(bill_JinE)'];  
+			return $HeJi;
+		}
+	}
+
+//	print(get_HeJi($Start, $End));
+
 	
 
 	///////////////////
-	// 2、获得 member 表中的所有 member_Type 客户列表
+	// 3、获得 member 表中的所有 member_Type 客户列表
 	//  SELECT * FROM stone.member WHERE member_Type=0;
 	// 
 	//  member_Type = 0 , 为 零售客户
@@ -153,7 +185,7 @@
 //	var_dump(get_Type(0));
 
 	//////////////////
-	// 3、根据 时间段、单据状态和 member_name = bill_DanWei 查询 bill 表
+	// 4、根据 时间段、单据状态和 member_name = bill_DanWei 查询 bill 表
 	//   SELECT sum(bill_JingZhong)
 	//       FROM stone.bill WHERE 
 	//            bill_ZhuangTai>=1 AND 
@@ -183,7 +215,37 @@
 
 
 	//////////////////
-	// 4、根据 时间段、单据状态和 member_name = bill_DanWei 查询 bill 表
+	// 5、根据 时间段、单据状态和 member_name = bill_DanWei 查询 bill 表
+	//   SELECT sum(bill_JinE)
+	//       FROM stone.bill WHERE 
+	//            bill_ZhuangTai>=1 AND 
+	//            bill_DanWei="H华盛公司" AND 
+	//            bill_GuoBang2>="2015-12-01" AND 
+	//            bill_GuoBang2<="2015-12-31";
+	//
+	//  累计 bill_JinE 金额的值
+	function get_jinE($Start, $End, $DanWei) {
+		$SQL = ' SELECT sum(bill_JinE) FROM stone.bill WHERE
+			bill_ZhuangTai>=1 AND
+			bill_DanWei="'.$DanWei.'" AND 
+			bill_GuoBang2>="'.$Start.'" AND 
+			bill_GuoBang2<="'.$End.'";
+		';
+
+		$Result=mysql_query($SQL);
+		while($row=mysql_fetch_array($Result))
+		{
+			// 合计此时间段内所有符合状态的单据 金额的总和。
+			$HeJi = $row['sum(bill_JinE)'] ;  
+			return $HeJi;
+		}
+	}
+
+//	print(get_jinE($Start, $End,"H华盛公司"));
+
+
+	//////////////////
+	// 6、根据 时间段、单据状态和 member_name = bill_DanWei 查询 bill 表
 	//SELECT sum(bill_JingZhong) FROM stone.bill, stone.member WHERE
 	//  member_Type = 0 And
 	//  bill_DanWei = member_name AND
@@ -210,11 +272,43 @@
 			return $HeJi;
 		}
 	}
+
+
+	//////////////////
+	// 7、根据 时间段、单据状态和 member_name = bill_DanWei 查询 bill 表
+	//SELECT sum(bill_JinE) FROM stone.bill, stone.member WHERE
+	//  member_Type = 0 And
+	//  bill_DanWei = member_name AND
+	//  bill_ZhuangTai>=1 AND 
+	//  bill_GuoBang2>="2015-12-01" AND 
+	//  bill_GuoBang2<="2015-12-31";
+	//
+	//  累计 bill_JingZhong 净重的值
+
+	function get_JinE_HJ($Start, $End, $Type) {
+		$SQL = ' SELECT sum(bill_JinE) FROM stone.bill, stone.member WHERE
+			member_Type = '.$Type.' AND
+			bill_DanWei = member_name AND
+			bill_ZhuangTai>=1 AND
+			bill_GuoBang2>="'.$Start.'" AND 
+			bill_GuoBang2<="'.$End.'";
+		';
+
+		$Result=mysql_query($SQL);
+		while($row=mysql_fetch_array($Result))
+		{
+			// 合计此时间段内所有符合状态的单据 净重的总和，并转换为吨。
+			$HeJi = $row['sum(bill_JinE)'];  
+			return $HeJi;
+		}
+	}
+
 /////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////
 	// 输出 销量合计
 	$HJ = get_HeJi($Start, $End);
-	$Context = "销量合计： " .round($HJ,2). " 吨";
+	$JinE_HJ = get_JinE_HeJi($Start, $End);
+	$Context = "销量合计： " .round($HJ,2). " 吨" . "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;销售金额合计：" . $JinE_HJ ."元";
 
 	// 输出表头
 	get_Header($Start, $End, $Context);
@@ -231,13 +325,15 @@ for($Type=0;$Type<3;$Type++) {
 
 		// 获得指定客户的合计值
 		$Mem_HJ = get_jingZhong($Start, $End,$Value);
+		$Mem_JE = get_JinE($Start, $End,$Value);
 		if($Mem_HJ !=0)$Id = $Id +1;
-		get_Body($Id, $Value, $Type, round($Mem_HJ,2), round($Mem_HJ/$HJ,4)*100);
+		get_Body($Id, $Value, $Type, round($Mem_HJ,2), $Mem_JE, round($Mem_HJ/$HJ,4)*100);
 	}
 
 	// 输出类型合计
 	$Type_HJ = get_Type_HJ($Start, $End, $Type);
-	get_Body_HJ($Type_HJ,  round($Type_HJ/$HJ,4)*100);	
+	$JinE_HJ = get_JinE_HJ($Start, $End, $Type);
+	get_Body_HJ($Type_HJ, $JinE_HJ, round($Type_HJ/$HJ,4)*100);	
 }
 /////////////////////////////////////////////////////
 

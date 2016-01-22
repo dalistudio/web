@@ -146,7 +146,7 @@ function onPost3(id)
 
 
 
-<form id="form2" name="form1" method="post" action="Report_Member.php">
+<form id="form2" name="form2" method="post" action="Report_Member.php">
   <br />
 <table class="tbl" width="300" border="0">
   <tr>
@@ -166,7 +166,7 @@ function onPost3(id)
   </tr>
   <tr>
     <td align="center"><input type="button" value="查询" onclick="onPost2(1);" /></td>
-    <td><input type="button" value="下载" onclick="onPost2(2);" />
+    <td><!-- input type="button" value="下载" onclick="onPost2(2);" / -->
     (注：生成需要10秒)</td>
   </tr>
 </table>
@@ -182,7 +182,7 @@ function onPost3(id)
 
 
 
-<form id="form3" name="form1" method="post" action="Report_Type.php">
+<form id="form3" name="form3" method="post" action="Report_Type.php">
   <br />
 <table class="tbl" width="300" border="0">
   <tr>
@@ -202,7 +202,7 @@ function onPost3(id)
   </tr>
   <tr>
     <td align="center"><input type="button" value="查询" onclick="onPost3(1);" /></td>
-    <td><input type="button" value="下载" onclick="onPost3(2);" />
+    <td><!-- input type="button" value="下载" onclick="onPost3(2);" / -->
     (注：生成需要10秒)</td>
   </tr>
 </table>
