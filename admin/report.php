@@ -117,6 +117,7 @@ function onPost3(id)
     <OPTION VALUE="0">零售
     <OPTION VALUE="1">预付款
     <OPTION VALUE="2">月结
+    <OPTION VALUE="3">进料
     </select></td>
   </tr>
   <tr>

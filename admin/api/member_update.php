@@ -16,6 +16,7 @@
 	$Type = $_GET['Type'];
 	$JingGao = $_GET['JingGao']; // 警告额度
 	$XinYong = $_GET['XinYong']; // 信用额度
+	$BlackList = $_GET['BlackList']; // 黑名单
 	
 	$sql  = "UPDATE member SET ";
 	$sql .= "member_DianHua='".$DianHua."',"; // 会员电话
@@ -23,7 +24,8 @@
 	$sql .= "member_Type='".$Type."',"; // 会员类型
 	$sql .= "member_name='".$Name."',"; // 会员名称
 	$sql .= "member_JingGao='".$JingGao."',"; // 警告额度
-	$sql .= "member_Xinyong='".$XinYong."'"; // 信用额度
+	$sql .= "member_Xinyong='".$XinYong."',"; // 信用额度
+	$sql .= "member_BlackList='". $BlackList."'"; // 黑名单
 	$sql .= " WHERE ";
 	$sql .= "member_id='".$Id."'";
 	$sql .= ";";

@@ -28,8 +28,12 @@
 
 	function OnUpdate()
 	{
-		document.form1.action = "api/member_update.php";
-		document.form1.submit(); // 提交按钮
+		var option=confirm("是否要编辑?");//true,false
+		if(option){
+			document.form1.action = "api/member_update.php";
+			document.form1.submit(); // 编辑按钮
+		}
+		
 	}
 	
 	function OnDel()
@@ -38,12 +42,12 @@
 		var option=confirm("是否真的删除?");//true,false
 		if(option){
 			document.form1.action = "api/member_del.php";
-			document.form1.submit(); // 提交按钮
+			document.form1.submit(); // 删除按钮
 		}
 	}
 	
 	// 处理选择行事件
-	function OnSelect(id,name,dianhua,yue,type,jinggao,xinyong)
+	function OnSelect(id,name,dianhua,yue,type,jinggao,xinyong,blacklist)
 	{
 		//alert("test");
 		document.getElementById("id").value=id;
@@ -53,27 +57,30 @@
 		document.getElementById("Type").value=type;
 		document.getElementById("JingGao").value=jinggao;
 		document.getElementById("XinYong").value=xinyong;
+		document.getElementById("BlackList").value=blacklist;
 	}
 </script>
 </head>
 
 <body>
-<table class="tbl" width="700" border="1">
+<table class="tbl" width="800" border="1">
   <tr>
     <th width="10%">编号</th>
     <th width="20%">名称</th>
-    <th width="15%">电话</th>
+    <th width="10%">电话</th>
     <th width="15%">余额</th>
     <th width="10%">类型</th>
-    <th width="15%">警告额度</th>
-    <th width="15%">信用额度</th>
+    <th width="12%">警告额度</th>
+    <th width="12%">信用额度</th>
+    <th width="10%">黑名单</th>
+
   </tr>
 <?php
-  $sql  = "Select * FROM member;";
+  $sql  = "SELECT * FROM stone.member order by member_name ASC;";
   $result=mysql_query($sql); // 执行SQL语句
   while($row = mysql_fetch_array($result)) // 循环每条记录
   {
-	print("<tr onclick=OnSelect('".$row['member_id']."','".$row['member_name']."','".$row['member_DianHua']."','".$row['member_YuE']."','".$row['member_Type']."','".$row['member_JingGao']."','".$row['member_XinYong']."');>");
+	print("<tr onclick=OnSelect('".$row['member_id']."','".$row['member_name']."','".$row['member_DianHua']."','".$row['member_YuE']."','".$row['member_Type']."','".$row['member_JingGao']."','".$row['member_XinYong']."','".$row['member_BlackList']."');>");
  	print("  <td>".$row['member_id']."</td>");
   	print("  <td>".$row['member_name']."</td>");
   	print("  <td>".$row['member_DianHua']."</td>");
@@ -89,13 +96,27 @@
 		case "2":
 			print("  <td>月结</td>");
 			break;
+		case "3":
+			print("  <td>进料</td>");
+			break;
 	}
 	print("  <td>".$row['member_JingGao']."</td>");
 	print("  <td>".$row['member_XinYong']."</td>");
+	switch($row['member_BlackList'])
+	{
+		case "0":
+			print("    <td>允许</td>");
+			break;
+		case "1":
+			print("    <td><font color=red>禁止</font></td>");
+			break;
+
+	}
   	print("</tr>");
   }
 ?>
   <tr>
+    <td>&nbsp;</td>
     <td>&nbsp;</td>
     <td>&nbsp;</td>
     <td>&nbsp;</td>
@@ -142,6 +163,7 @@
     <option value="0">零售
     <option value="1">预存
     <option value="2">月结
+    <option value="3">进料
     </select></td>
   </tr>
   <?php
@@ -156,6 +178,13 @@
   	print('</tr>');
   }
   ?>
+<tr>
+    <td align="center">黑名单：</td>
+    <td><select name="BlackList" id="BlackList">
+    <option value="0">允许
+    <option value="1">禁止
+    </select></td>
+  </tr>
   	<tr>
     <td colspan="2"><table width="100%" border="0">
       <tr>

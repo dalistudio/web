@@ -27,14 +27,21 @@
 
 	function OnUpdate()
 	{
-		document.form1.action = "api/user_update.php";
-		document.form1.submit(); // 提交按钮
+		var option=confirm("是否真的编辑?");//true,false
+		if(option){
+			document.form1.action = "api/user_update.php";
+			document.form1.submit(); // 编辑按钮
+		}
 	}
 	
 	function OnDel()
 	{
-		document.form1.action = "api/user_del.php";
-		document.form1.submit(); // 提交按钮
+		var option=confirm("是否真的删除?");//true,false
+		if(option){
+			document.form1.action = "api/user_del.php";
+			document.form1.submit(); // 删除按钮
+		}
+		
 	}
 	
 	// 处理选择行事件
