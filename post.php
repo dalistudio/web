@@ -108,7 +108,7 @@
 			if(inject_check($sql))
 			{
 				if(mysql_query($sql,$conn)) // 执行插入单据表
-				print("post1"); // 成功
+				print("post1:".$mysqldate); // 成功
 			else
 				print("ERROR POST1:". mysql_error()); // 失败	
 			}
@@ -196,7 +196,7 @@
 				// 零售用户不需要修改余额
 				if($res1){
 					mysql_query("COMMIT",$conn); // 提交
-					print("post2"); // 成功
+					print("post2:".$mysqldate); // 成功
 				}else{
 					mysql_query("ROLLBACK",$conn); // 回滚
 					print("ERROR POST2:". mysql_error()); // 失败
@@ -236,7 +236,7 @@
 
 			if($res1 && $res2 && $res3 && $res4){
 				mysql_query("COMMIT",$conn); // 提交
-				print("post2"); // 成功
+				print("post2:".$mysqldate); // 成功
 			}else{
 				mysql_query("ROLLBACK",$conn); // 回滚
 				print("ERROR POST2:". mysql_error()); // 失败
@@ -272,7 +272,7 @@
 			if(inject_check($sql))
 			{
 				if(mysql_query($sql,$conn)) // 更新单据表
-				print("post3"); // 成功
+				print("post3:".$mysqldate); // 成功
 			else
 				print("ERROR POST3:". mysql_error()); // 失败
 			}
@@ -293,7 +293,7 @@
 			if(inject_check($sql))
 			{
 				if(mysql_query($sql,$conn)) // 更新单据表
-				print("post8"); // 成功
+				print("post8:".$mysqldate); // 成功
 			else
 				print("ERROR POST8:". mysql_error()); // 失败	
 			}
@@ -332,6 +332,9 @@
 		$goods .= "goods.goods_CheXing='".$CheXing."'"; // 车型
 		$goods .= ";";
 		$result=mysql_query($goods); // 执行SQL语句
+
+//print(iconv('UTF-8', 'GB2312', $goods));
+
 
 		$number = mysql_num_rows($result); // 获得结果集中的记录条数
 

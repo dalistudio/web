@@ -1,5 +1,5 @@
 <?php
-$mysql_server_name='192.168.1.30';
+$mysql_server_name='192.168.1.10';
 $mysql_username='root';
 $mysql_password='123456';
 $mysql_database='stone';
