@@ -12,11 +12,11 @@
 		die();
 	}
 	
-	$Start = $_POST['start']; // 开始时间
-	$End = $_POST['end']; // 结束时间
-	$DanHao = $_POST['DanHao']; // 单号
-	$Member_name = $_POST['member']; // 客户名
-	$Type = $_POST['type']; // 类型
+	@$Start = $_POST['start']; // 开始时间
+	@$End = $_POST['end']; // 结束时间
+	@$DanHao = $_POST['DanHao']; // 单号
+	@$Member_name = $_POST['member']; // 客户名
+	@$Type = $_POST['type']; // 类型
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">

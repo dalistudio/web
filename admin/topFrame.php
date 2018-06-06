@@ -2,7 +2,7 @@
 //
 // Copyright (c) 2014, wangdali <wangdali@qq.com>, All Rights Reserved.
 //
-    include 'inc/session.inc';
+//    include 'inc/session.inc';
 //	check_login();
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -37,7 +37,7 @@ body {
     <td width="1">&nbsp;</td>
   </tr>
   <tr>
-    <td><marquee direction="left">跑马灯</marquee></td>
+    <td><!-- marquee direction="left">跑马灯</marquee --></td>
     <td>&nbsp;</td>
   </tr>
   <tr>
@@ -49,8 +49,8 @@ body {
         <li><a href="pay.php" target="mainFrame">消费管理</a></li>
         <li><a href="report.php" target="mainFrame">账单生成</a></li>
         <li><a href="change.php" target="mainFrame">改单管理</a></li>
-        <li><a href="card.php" target="mainFrame">门禁卡管理</a></li>
-        <li><a href="database.php" target="mainFrame">数据库管理</a></li>
+        <!-- li><a href="card.php" target="mainFrame">门禁卡管理</a></li -->
+        <!-- li><a href="database.php" target="mainFrame">数据库管理</a></li -->
         </ul>
         </td>
       </tr>
