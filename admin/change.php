@@ -37,7 +37,7 @@
 		var HuoWu = document.getElementById("HuoWu").value;
 		var GuiGe = document.getElementById("GuiGe").value;
 
-		var url = "/getdanjia.php?";
+		var url = "getdanjia.php?";
 		url += "Member=";
 		url += Member;
 		url += "&CheXing=";

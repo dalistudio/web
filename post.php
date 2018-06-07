@@ -5,35 +5,35 @@
 	include 'session.inc';
 	include 'conn.php';
         
-	$SiBangYuan = $_POST['SiBangYuan']; // 司磅员
-	$FangXingYuan = $_POST['FangXingYuan']; // 放行员
-	$ZhuangTai = $_POST['ZhuangTai']; // 状态，第一次过磅；第二次过磅；放行
-	$DanHao = $_POST['DanHao']; // 单号
-	$CheHao = $_POST['CheHao']; // 车号
-	$CheXing = $_POST['CheXing']; // 车型
-	$DianHua =  $_POST['DianHua']; // 电话
-	$DanWei = $_POST['DanWei']; // 单位
-	$HuoWu = $_POST['HuoWu']; // 货物
-	$GuiGe = $_POST['GuiGe']; // 规格
-	$PiZhong = $_POST['PiZhong']; // 皮重
-	$MaoZhong = $_POST['MaoZhong']; // 毛重
-	$JingZhong = $_POST['JiangZhong']; // 净重
-	$DanJia = $_POST['DanJia']; // 单价
-	$JinE = $_POST['JinE']; // 金额
-	$BeiZhu = $_POST['BeiZhu']; // 备注信息
+	@$SiBangYuan = $_POST['SiBangYuan']; // 司磅员
+	@$FangXingYuan = $_POST['FangXingYuan']; // 放行员
+	@$ZhuangTai = $_POST['ZhuangTai']; // 状态，第一次过磅；第二次过磅；放行
+	@$DanHao = $_POST['DanHao']; // 单号
+	@$CheHao = $_POST['CheHao']; // 车号
+	@$CheXing = $_POST['CheXing']; // 车型
+	@$DianHua =  $_POST['DianHua']; // 电话
+	@$DanWei = $_POST['DanWei']; // 单位
+	@$HuoWu = $_POST['HuoWu']; // 货物
+	@$GuiGe = $_POST['GuiGe']; // 规格
+	@$PiZhong = $_POST['PiZhong']; // 皮重
+	@$MaoZhong = $_POST['MaoZhong']; // 毛重
+	@$JingZhong = $_POST['JiangZhong']; // 净重
+	@$DanJia = $_POST['DanJia']; // 单价
+	@$JinE = $_POST['JinE']; // 金额
+	@$BeiZhu = $_POST['BeiZhu']; // 备注信息
         
  	// 编码转换
-	$CheHao = iconv('GB2312', 'UTF-8', $CheHao); // 车号
-	$CheXing = iconv('GB2312', 'UTF-8', $CheXing); // 车型
-	$DanWei = iconv('GB2312', 'UTF-8', $DanWei); // 单位
-	$HuoWu = iconv('GB2312', 'UTF-8', $HuoWu); // 货物
-	$BeiZhu = iconv('GB2312', 'UTF-8', $BeiZhu); // 备注
-	$SiBangYuan = iconv('GB2312', 'UTF-8', $SiBangYuan); // // 司磅员
-	$FangXingYuan = iconv('GB2312', 'UTF-8', $FangXingYuan); // 放行员
+	@$CheHao = iconv('GB2312', 'UTF-8', $CheHao); // 车号
+	@$CheXing = iconv('GB2312', 'UTF-8', $CheXing); // 车型
+	@$DanWei = iconv('GB2312', 'UTF-8', $DanWei); // 单位
+	@$HuoWu = iconv('GB2312', 'UTF-8', $HuoWu); // 货物
+	@$BeiZhu = iconv('GB2312', 'UTF-8', $BeiZhu); // 备注
+	@$SiBangYuan = iconv('GB2312', 'UTF-8', $SiBangYuan); // // 司磅员
+	@$FangXingYuan = iconv('GB2312', 'UTF-8', $FangXingYuan); // 放行员
         
 	date_default_timezone_set('PRC');//其中PRC为“中华人民共和国”
-	$datetime = strtotime("now"); // 获得当前日期
-	$mysqldate = date("Y-m-d H:i:s", $datetime); // 转换为指定格式的字符串
+	@$datetime = strtotime("now"); // 获得当前日期
+	@$mysqldate = date("Y-m-d H:i:s", $datetime); // 转换为指定格式的字符串
         
 	switch($ZhuangTai)
 	{

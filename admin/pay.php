@@ -40,7 +40,7 @@ function OnAdd()
   var xmlhttp = createXMLHttpRequest();
 
   function cc(val){
-	var value = "/getyue.php?DanWei=";
+	var value = "getyue.php?DanWei=";
 	value += val;
 
 //    alert(value);
