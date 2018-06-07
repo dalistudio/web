@@ -27,8 +27,21 @@
 <script src="/js/WdatePicker.js"></script> 
 <script src="/js/ajax.js"></script>
  <script>
+function check()
+{
+	var DanHao = document.getElementById('DanHao').value; // 单号
+	if(DanHao=="")
+	{
+		alert('单号不能为空！！！');
+		document.baseForm.DanHao.focus()
+		return;
+	}
+}
+
 function OnAdd()
 {
+	check();
+
 	// 确认框
 	var option=confirm("是否真的添加?");//true,false
 	if(option){
