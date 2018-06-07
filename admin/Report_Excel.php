@@ -213,7 +213,13 @@ ini_set('max_execution_time', '500');
 		if(strcmp($DanWei,'')!=0)$bill_sql .= "bill_DanWei='".$DanWei."' and "; // 单位
 		if(strcmp($HuoWu2,'')!=0)$bill_sql .= "bill_HuoWu='".$HuoWu2."' and "; // 货物
 		if(strcmp($GuiGe2,'')!=0)$bill_sql .= "bill_GuiGe='".$GuiGe2."' and "; // 规格
-		if(strcmp($Type,'')!=0)$bill_sql .= "bill_Type='".$Type."' and "; // 支付类型
+
+		// 支付类型 20180606 修改
+		if(strcmp($Type,'')!=0)
+		{$bill_sql .= "bill_Type='".$Type."' and ";}
+		else
+		{$bill_sql .=" (bill_Type='0' or bill_Type='1' or bill_Type='2' ) and ";}
+
 		if(strcmp($SiBangYuan,'')!=0)$bill_sql .= "bill_SiBangYuan='".$SiBangYuan."' and "; // 司磅员
 //		$bill_sql .= "bill_JinE<>0"; // 金额不等于0
 		$bill_sql .= "bill_ZhuangTai>=1"; // 完成第二次过磅的单
@@ -241,7 +247,7 @@ ini_set('max_execution_time', '500');
 			->setCellValue('I'.$excel_pos, round($bill_row['bill_JingZhong']/1000/$bill_row['bill_MiDu'],2)) // 立方
 			->setCellValue('J'.$excel_pos, $bill_row['bill_JinE']) // 金额
 			->setCellValue('K'.$excel_pos, $bill_row['bill_SiBangYuan']) // 司磅员
-			->setCellValue('L'.$excel_pos, $bill_row['bill_BeiZhu']); // 备注
+			->setCellValue('L'.$excel_pos,/* $bill_row['bill_BeiZhu']*/''); // 备注
 			$objPHPExcel->getActiveSheet()->getStyle('A'.$excel_pos.':A'.$excel_pos)->applyFromArray($styleArray);
 			$objPHPExcel->getActiveSheet()->getStyle('B'.$excel_pos.':B'.$excel_pos)->applyFromArray($styleArray);
 			$objPHPExcel->getActiveSheet()->getStyle('C'.$excel_pos.':C'.$excel_pos)->applyFromArray($styleArray);

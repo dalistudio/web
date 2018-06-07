@@ -161,7 +161,7 @@
   $row = mysql_fetch_array($result);
 ?>
 <form id="form1" name="form1" method="get" action="">
-<table class="tbl" width="1100" border="1">
+<table class="tbl" width="1500" border="1">
   <tbody>
     <tr>
       <th align="center" style="font-weight: bold">原始 / 修改数据</th>
@@ -352,7 +352,7 @@
       </td>
       <td bgcolor="#FFFD00">
         <label for="CaoZuoYuan">操作：</label>
-		<input type="text" width="30" value="<?=$row['change_Op']?>" disabled>
+		<input type="text" width="30" value="<?=@$row['change_Op']?>" disabled>
       </td>
     </tr>
     <tr>
