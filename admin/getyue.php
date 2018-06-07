@@ -1,10 +1,11 @@
 <?php
-	include 'session.inc';
-	include 'conn.php';
-	$DanWei = $_GET['DanWei'];
+	include '../session.inc';
+	include '../conn.php';
+	@$DanWei = $_GET['DanWei'];
 	
 	$sql  = "SELECT * FROM member WHERE ";
-	$sql .= "member_name='".iconv('GB2312', 'UTF-8', $DanWei)."';";
+//	@$sql .= "member_name='".iconv('GBK', 'UTF-8', $DanWei)."';";
+	$sql .= "member_name='".$DanWei ."';";
 
 //	print($sql);
 	$result=mysql_query($sql); // 执行SQL语句

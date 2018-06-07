@@ -1,10 +1,10 @@
 <?php
-	include 'session.inc';
-	include 'conn.php';
-	$Member = iconv('GB2312', 'UTF-8', $_GET['Member']);
-	$CheXing = iconv('GB2312', 'UTF-8',$_GET['CheXing']);
-	$HuoWu = iconv('GB2312', 'UTF-8', $_GET['HuoWu']);
-	$GuiGe =iconv('GB2312', 'UTF-8',  $_GET['GuiGe']);
+	include '../session.inc';
+	include '../conn.php';
+	$Member = $_GET['Member'];
+	$CheXing = $_GET['CheXing'];
+	$HuoWu = $_GET['HuoWu'];
+	$GuiGe = $_GET['GuiGe'];
 	
 	$sql = "SELECT member_name,goods_MiDu,goods_DanJia,goods_DanWei FROM stone.member,stone.goods";
 	$sql .= " WHERE "; 
