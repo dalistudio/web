@@ -1,4 +1,8 @@
 <?php
+//
+// Copyright (c) 2014-2018, wangdali <wangdali@qq.com>, All Rights Reserved.
+//
+
 $mysql_server_name='127.0.0.1';
 $mysql_username='root';
 $mysql_password='Qwer1234';

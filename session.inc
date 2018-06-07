@@ -1,6 +1,6 @@
 <?php
 //
-// Copyright (c) 2014, wangdali <wangdali@qq.com>, All Rights Reserved.
+// Copyright (c) 2014-2018, wangdali <wangdali@qq.com>, All Rights Reserved.
 //
     ini_set('session.use_cookies',1); // 以Cookie作为会话ID的存放机制。
     ini_set('session.use_only_cookies',1); // 只使用Cookie作为会话ID传输的机制，不允许使用URL传输。

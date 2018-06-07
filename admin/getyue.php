@@ -1,4 +1,8 @@
 <?php
+//
+// Copyright (c) 2014-2018, wangdali <wangdali@qq.com>, All Rights Reserved.
+//
+
 	include '../session.inc';
 	include '../conn.php';
 	@$DanWei = $_GET['DanWei'];
