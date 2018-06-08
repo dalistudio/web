@@ -11,24 +11,27 @@
 <table class="tbl" width="300" border="0" align="center">
   <tr>
     <th colspan="2">登录</th>
-    </tr>
+  </tr>
+  <tr><td colspan="2">&nbsp;</td></tr>
   <tr>
-    <td>用户：</td>
+    <td>&nbsp;&nbsp;用户：</td>
     <td>
-      <input name="user" type="text" id="user" size="16" />
+      <input name="user" type="text" id="user" size="16" style="width:160px;" />
     </td>
   </tr>
   <tr>
-    <td>密码：</td>
+    <td>&nbsp;&nbsp;密码：</td>
     <td>
-    	<input name="pwd" type="password" id="pwd" maxlength="16" />
+    	<input name="pwd" type="password" id="pwd" style="width:160px;" />
     </td>
   </tr>
+  <tr><td colspan="2">&nbsp;</td></tr>
   <tr>
-    <td>
-    	<input type="submit" name="button" id="button" value="登录" />
+    <td colspan="2">
+    	<div align="center"><input type="submit" name="button" id="button" value="登录" /></div>
     </td>
   </tr>
+  <tr><td colspan="2">&nbsp;</td></tr>
 </table>
 </form>
 </body>
