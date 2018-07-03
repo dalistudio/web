@@ -38,6 +38,10 @@
 		case "2":
 			$Title = "月结客户报表";
 			break;
+		case "3":
+			$Title = "进料报表";
+			break;
+
 	}
 	//////////////////////////////////////////////////////////////////
 	// 这里输出 HTML
@@ -138,7 +142,13 @@
 		if(strcmp($DanWei,'')!=0)$bill_sql .= "bill_DanWei='".$DanWei."' and "; // 单位
 		if(strcmp($HuoWu2,'')!=0)$bill_sql .= "bill_HuoWu='".$HuoWu2."' and "; // 货物
 		if(strcmp($GuiGe2,'')!=0)$bill_sql .= "bill_GuiGe='".$GuiGe2."' and "; // 规格
-		if(strcmp($Type,'')!=0)$bill_sql .= "bill_Type='".$Type."' and "; // 支付类型
+		
+		// 支付类型 20180606 修改
+		if(strcmp($Type,'')!=0)
+		{$bill_sql .= "bill_Type='".$Type."' and ";}
+		else
+		{$bill_sql .=" (bill_Type='0' or bill_Type='1' or bill_Type='2' ) and ";}
+
 		if(strcmp($SiBangYuan,'')!=0)$bill_sql .= "bill_SiBangYuan='".$SiBangYuan."' and "; // 司磅员
 //		$bill_sql .= "bill_JinE<>0"; // 金额不等于0
 		$bill_sql .= "bill_ZhuangTai>=1"; // 完成第二次过磅的单

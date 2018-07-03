@@ -5,7 +5,7 @@
 <body>
 Welcome!
 <br />
-SERVER IP：<?=$_SERVER['SERVER_ADDR']?>
+SERVER IP:<?=$_SERVER['SERVER_ADDR']?>
 <br />
 </body>
 </html>
