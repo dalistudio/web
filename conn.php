@@ -3,7 +3,8 @@
 // Copyright (c) 2014-2018, wangdali <wangdali@qq.com>, All Rights Reserved.
 //
 
-$mysql_server_name='192.168.1.30';
+error_reporting(E_ALL & ~E_DEPRECATED);
+$mysql_server_name='127.0.0.1';
 $mysql_username='root';
 $mysql_password='123456';
 $mysql_database='stone';
