@@ -7,18 +7,18 @@
 	include 'conn.php';
 	$HuoWu = $_GET['huowu'];
 	
-	// ÕâÀïµÄ»õÎï²»ĞèÒª½øĞĞ±àÂë×ª»»
+	// è¿™é‡Œçš„è´§ç‰©ä¸éœ€è¦è¿›è¡Œç¼–ç è½¬æ¢
 	
 	$sql  = "SELECT * FROM type WHERE ";
 	$sql .= "type_HuoWu='".iconv('GB2312', 'UTF-8', $HuoWu)."';";
 
 //	print($sql);
-	$result=mysql_query($sql); // Ö´ĞĞSQLÓï¾ä
+	$result=mysql_query($sql); // æ‰§è¡ŒSQLè¯­å¥
 	
 	print('[');
-	while($row = mysql_fetch_array($result)) // Ñ­»·Ã¿Ìõ¼ÇÂ¼
+	while($row = mysql_fetch_array($result)) // å¾ªç¯æ¯æ¡è®°å½•
 	{
-		$type_GuiGe = $row['type_GuiGe']; // »õÎïµÄ¹æ¸ñ
+		$type_GuiGe = $row['type_GuiGe']; // è´§ç‰©çš„è§„æ ¼
 		print('"'.$type_GuiGe.'",');
 	}
 	print('"0"');

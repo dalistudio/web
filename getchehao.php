@@ -23,11 +23,13 @@
 		$car_DanWei = $row['car_DanWei']; // 单位
 		$car_HuoWu = $row['car_HuoWu']; // 货物名称
 		$car_GuiGe = $row['car_GuiGe']; // 货物的规格
+		$car_XianZhong = $row['car_XianZhong']; // 限重 v1.7.1
 		print('"'.$car_CheHao.'",');
 		print('"'.$car_CheXing.'",');
 		print('"'.$car_DanWei.'",');
 		print('"'.$car_HuoWu.'",');
 		print('"'.$car_GuiGe.'",');
+		print('"'.$car_XianZhong.'",'); // 限重 v1.7.1
 	}
 	print('"0"');
 	print(']');

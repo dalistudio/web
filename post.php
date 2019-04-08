@@ -1,6 +1,6 @@
 <?php
 //
-// Copyright (c) 2014-2018, wangdali <wangdali@qq.com>, All Rights Reserved.
+// Copyright (c) 2014-2019, wangdali <wangdali@qq.com>, All Rights Reserved.
 //
 	include 'session.inc';
 	include 'conn.php';
@@ -15,6 +15,7 @@
 	@$DanWei = $_POST['DanWei']; // 单位
 	@$HuoWu = $_POST['HuoWu']; // 货物
 	@$GuiGe = $_POST['GuiGe']; // 规格
+	@$XianZhong = $_POST['XianZhong']; // 限重 v1.7.1
 	@$PiZhong = $_POST['PiZhong']; // 皮重
 	@$MaoZhong = $_POST['MaoZhong']; // 毛重
 	@$JingZhong = $_POST['JiangZhong']; // 净重
@@ -30,6 +31,7 @@
 	@$BeiZhu = iconv('GB2312', 'UTF-8', $BeiZhu); // 备注
 	@$SiBangYuan = iconv('GB2312', 'UTF-8', $SiBangYuan); // // 司磅员
 	@$FangXingYuan = iconv('GB2312', 'UTF-8', $FangXingYuan); // 放行员
+	@$XianZhong = iconv('GB2312', 'UTF-8', $XianZhong); // 限重 v1.7.1
         
 	date_default_timezone_set('PRC');//其中PRC为“中华人民共和国”
 	@$datetime = strtotime("now"); // 获得当前日期
@@ -94,6 +96,7 @@
 			$sql .= "bill_DanWei="."'".$DanWei."',"; // 单位
 			$sql .= "bill_HuoWu="."'".$HuoWu."',"; // 货物
 			$sql .= "bill_GuiGe="."'".$GuiGe."',"; // 规格	
+			$sql .= "bill_XianZhong=" ."'".$XianZhong."',"; // 限重 v1.7.1	
 			$sql .= "bill_PiZhong="."'".$PiZhong."',"; // 皮重
 			$sql .= "bill_BeiZhu="."'".$BeiZhu."',"; // 备注
 			$sql .= "bill_ZhuangTai=0,"; // 不可放行
@@ -120,7 +123,8 @@
 			$car .= "car_CheXing="."'".$CheXing."',"; // 车型
 			$car .= "car_DanWei="."'".$DanWei."',"; // 单位
 			$car .= "car_HuoWu="."'".$HuoWu."',"; // 货物
-			$car .= "car_GuiGe="."'".$GuiGe."'"; // 规格
+			$car .= "car_GuiGe="."'".$GuiGe."',"; // 规格
+			$car .= "car_XianZhong="."'".$XianZhong."'"; // 限重 v1.7.1
 			$car .= ";";
 			$result=mysql_query($car); // 执行SQL语句
     

@@ -6,21 +6,21 @@
 	include 'session.inc';
 	include 'conn.php';
 	
-	$Id = $_GET['id']; // µ¥ºÅ
+	$Id = $_GET['id']; // å•å·
 	if($Id==0)
 	{
-		// ²éÑ¯Êý¾Ý¿â£¬»ñµÃsys±íÖÐµÄÔöÁ¿µ¥ºÅ
-		// ²¢¼Ó1·µ»ØÐÂµÄµ¥ºÅ¡£
+		// æŸ¥è¯¢æ•°æ®åº“ï¼ŒèŽ·å¾—sysè¡¨ä¸­çš„å¢žé‡å•å·
+		// å¹¶åŠ 1è¿”å›žæ–°çš„å•å·ã€‚
 		$sql="Select * FROM sys WHERE sys_id=1;";
-		$result=mysql_query($sql); // Ö´ÐÐSQLÓï¾ä
-		while($row = mysql_fetch_array($result)) // Ñ­»·Ã¿Ìõ¼ÇÂ¼
+		$result=mysql_query($sql); // æ‰§è¡ŒSQLè¯­å¥
+		while($row = mysql_fetch_array($result)) // å¾ªçŽ¯æ¯æ¡è®°å½•
 		{
-			$DanHao = $row['sys_DanHao']; // µ¥ºÅ
+			$DanHao = $row['sys_DanHao']; // å•å·
 		}
-		$DanHao += 1; // µ¥ºÅ +1
-		print('{"id":"'.$DanHao.'"}'); // ·µ»ØJSONÊý¾Ý
+		$DanHao += 1; // å•å· +1
+		print('{"id":"'.$DanHao.'"}'); // è¿”å›žJSONæ•°æ®
 		
-		// ¸üÐÂµ¥ºÅ
+		// æ›´æ–°å•å·
 		$sql="UPDATE sys SET ";
 		$sql .= "sys_DanHao="."'".$DanHao."'"; 
 		$sql .= " WHERE ";
@@ -28,53 +28,54 @@
 		$sql .= ";";
 		mysql_query($sql,$conn);
 	}
-	else // »ñµÃ±íÖÐµÄµ¥ºÅÊý¾Ý
+	else // èŽ·å¾—è¡¨ä¸­çš„å•å·æ•°æ®
 	{
-		$sql="Select * FROM bill WHERE bill_DanHao='".$Id."';"; // ¸ù¾Ýµ¥ºÅ²éÑ¯Êý¾Ý
+		$sql="Select * FROM bill WHERE bill_DanHao='".$Id."';"; // æ ¹æ®å•å·æŸ¥è¯¢æ•°æ®
 		if(inject_check($sql))
 		{
-			$result=mysql_query($sql); // Ö´ÐÐSQLÓï¾ä
+			$result=mysql_query($sql); // æ‰§è¡ŒSQLè¯­å¥
 		}
 	
 		$row = mysql_fetch_array($result);
-		//while($row = mysql_fetch_array($result)) // Ñ­»·Ã¿Ìõ¼ÇÂ¼
+		//while($row = mysql_fetch_array($result)) // å¾ªçŽ¯æ¯æ¡è®°å½•
 		{
 			if(empty($row))
 			{
 				print('{');
-				print('"id":"0"'); // ·µ»ØIDÎª0£¬±íÊ¾Êý¾Ý¿âÖÐÃ»ÓÐÕÒµ½Õâ¸öµ¥ºÅ
+				print('"id":"0"'); // è¿”å›žIDä¸º0ï¼Œè¡¨ç¤ºæ•°æ®åº“ä¸­æ²¡æœ‰æ‰¾åˆ°è¿™ä¸ªå•å·
 				print('}');
 			}
 			else
 			{
 				print('{');
-				print('"id":"'.$row['bill_DanHao'].'",'); // µ¥ºÅ
-				print('"ch":"'.$row['bill_CheHao'].'",'); // ³µºÅ
-				print('"cx":"'.$row['bill_CheXing'].'",'); // ³µÐÍ
-				print('"dh":"'.$row['bill_DianHua'].'",'); // µç»°
-				print('"dw":"'.$row['bill_DanWei'].'",'); // µ¥Î»
-				print('"hw":"'.$row['bill_HuoWu'].'",'); // »õÎï
-				print('"gg":"'.$row['bill_GuiGe'].'",'); // ¹æ¸ñ
-				print('"pz":"'.$row['bill_PiZhong'].'",'); // Æ¤ÖØ
-				print('"mz":"'.$row['bill_MaoZhong'].'",'); // Ã«ÖØ
-				print('"jz":"'.$row['bill_JingZhong'].'",'); // ¾»ÖØ
-				print('"dj":"'.$row['bill_DanJia'].'",'); // µ¥¼Û
-				print('"djdw":"'.$row['bill_DanJiaDanWei'].'",'); // µ¥¼Ûµ¥Î»
-				print('"md":"'.$row['bill_MiDu'].'",'); // ÃÜ¶È
-				print('"je":"'.$row['bill_JinE'].'",'); // ½ð¶î
-				print('"ye":"'.$row['bill_YuE'].'",'); // Óà¶î
-				print('"bz":"'.$row['bill_BeiZhu'].'",'); // ±¸×¢
-				print('"gb1":"'.$row['bill_GuoBang1'].'",'); // µÚÒ»´Î¹ý°õÊ±¼ä
-				print('"gb2":"'.$row['bill_GuoBang2'].'",'); // µÚ¶þ´Î¹ý°õÊ±¼ä
-				print('"cc":"'.$row['bill_ChuChang'].'",'); // ³ö³¡Ê±¼ä
-				print('"sby":"'.$row['bill_SiBangYuan'].'",'); // Ë¾°õÔ±
-				print('"bay":"'.$row['bill_BaoAnYuan'].'",'); // ±£°²Ô±
-				print('"zt":"'.$row['bill_ZhuangTai'].'",'); // ×´Ì¬
-				print('"type":"'.$row['bill_Type'].'"'); // Ö§¸¶ÀàÐÍ
+				print('"id":"'.$row['bill_DanHao'].'",'); // å•å·
+				print('"ch":"'.$row['bill_CheHao'].'",'); // è½¦å·
+				print('"cx":"'.$row['bill_CheXing'].'",'); // è½¦åž‹
+				print('"dh":"'.$row['bill_DianHua'].'",'); // ç”µè¯
+				print('"dw":"'.$row['bill_DanWei'].'",'); // å•ä½
+				print('"hw":"'.$row['bill_HuoWu'].'",'); // è´§ç‰©
+				print('"gg":"'.$row['bill_GuiGe'].'",'); // è§„æ ¼
+				print('"xz":"'.$row['bill_XianZhong'].'",'); // é™é‡ v1.7.1
+				print('"pz":"'.$row['bill_PiZhong'].'",'); // çš®é‡
+				print('"mz":"'.$row['bill_MaoZhong'].'",'); // æ¯›é‡
+				print('"jz":"'.$row['bill_JingZhong'].'",'); // å‡€é‡
+				print('"dj":"'.$row['bill_DanJia'].'",'); // å•ä»·
+				print('"djdw":"'.$row['bill_DanJiaDanWei'].'",'); // å•ä»·å•ä½
+				print('"md":"'.$row['bill_MiDu'].'",'); // å¯†åº¦
+				print('"je":"'.$row['bill_JinE'].'",'); // é‡‘é¢
+				print('"ye":"'.$row['bill_YuE'].'",'); // ä½™é¢
+				print('"bz":"'.$row['bill_BeiZhu'].'",'); // å¤‡æ³¨
+				print('"gb1":"'.$row['bill_GuoBang1'].'",'); // ç¬¬ä¸€æ¬¡è¿‡ç£…æ—¶é—´
+				print('"gb2":"'.$row['bill_GuoBang2'].'",'); // ç¬¬äºŒæ¬¡è¿‡ç£…æ—¶é—´
+				print('"cc":"'.$row['bill_ChuChang'].'",'); // å‡ºåœºæ—¶é—´
+				print('"sby":"'.$row['bill_SiBangYuan'].'",'); // å¸ç£…å‘˜
+				print('"bay":"'.$row['bill_BaoAnYuan'].'",'); // ä¿å®‰å‘˜
+				print('"zt":"'.$row['bill_ZhuangTai'].'",'); // çŠ¶æ€
+				print('"type":"'.$row['bill_Type'].'"'); // æ”¯ä»˜ç±»åž‹
 				print('}');
 			}
 			
 		}
 	}
-	mysql_close($conn); // ¹Ø±ÕÊý¾Ý¿âÁ¬½Ó
+	mysql_close($conn); // å…³é—­æ•°æ®åº“è¿žæŽ¥
 ?>
