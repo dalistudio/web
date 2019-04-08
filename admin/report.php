@@ -4,6 +4,8 @@
 //
 	include '../session.inc';
 	include '../conn.php';
+
+	ini_set('memory_limit', '512M');
 	
 	check_login();
 	if($_SESSION['Level']!=0 && $_SESSION['Level']!=3)
